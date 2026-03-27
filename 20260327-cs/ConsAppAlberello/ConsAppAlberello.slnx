@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="ConsAppAlberello/ConsAppAlberello.csproj" />
+  <Project Path="ConsAppCalcolatrice/ConsAppCalcolatrice.csproj" Id="c62fb977-fcb1-4348-9b21-5e227b9758da" />
 </Solution>
