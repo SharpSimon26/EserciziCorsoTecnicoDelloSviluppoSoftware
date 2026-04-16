@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ConsAppBubbleSort/ConsAppBubbleSort.csproj" />
+  <Project Path="ConsAppMediaVoti/ConsAppMediaVoti.csproj" />
+  <Project Path="ConsAppOrdinamento/ConsAppOrdinamento.csproj" />
+  <Project Path="ConsAppTemperature/ConsAppTemperature.csproj" />
+</Solution>
