@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsAppEredit/ConsAppEredit.csproj" />
+  <Project Path="ConsAppVeicoli/ConsAppVeicoli.csproj" />
+</Solution>

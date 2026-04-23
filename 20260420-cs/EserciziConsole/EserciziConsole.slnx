@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ConsAppEccezioni/ConsAppEccezioni.csproj" />
+  <Project Path="ConsAppGenerics/ConsAppGenerics.csproj" />
+  <Project Path="ConsAppPayment/ConsAppPayment.csproj" />
+</Solution>

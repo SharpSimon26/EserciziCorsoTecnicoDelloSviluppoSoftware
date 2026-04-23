@@ -12,6 +12,23 @@ internal abstract class Poligono(int numeroLati, float lunghezzaLato)
     }
 
     public abstract float GetArea();
+
+    public static Poligono? Factory(float lato, int numeroLati)
+    {
+        switch (numeroLati)
+        {
+            case 3:
+                return new Triangolo(lato);
+            case 4:
+                return new Quadrato(lato);
+            case 5:
+                return new Pentagono(lato);
+            case 6:
+                return new Esagono(lato);
+            default:
+                return null;
+        }
+    }
 }
 
 internal class Triangolo(float lunghezzaLato) : Poligono(3, lunghezzaLato)
@@ -23,6 +40,8 @@ internal class Triangolo(float lunghezzaLato) : Poligono(3, lunghezzaLato)
     */    
     public override float GetArea()
     {
+        // TODO: spostare Math.Sqrt(3) / 4; nel costruttore come coefficiente calcolato 1 volta sola
+        // MathF restituisce in float anzichè in double e opzionalmente Math.Pow(LunghezzaLato, 2)
         return (float)(LunghezzaLato * LunghezzaLato * Math.Sqrt(3) / 4);
     }
 }
