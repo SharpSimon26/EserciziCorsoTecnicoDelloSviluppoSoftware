@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsAppDelegati/ConsAppDelegati.csproj" />
+  <Project Path="ConsAppLinq/ConsAppLinq.csproj" />
+</Solution>
