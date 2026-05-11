@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ConsAppAsync101/ConsAppAsync101.csproj" />
+  <Project Path="ConsAppExtensions/ConsAppExtensions.csproj" />
+  <Project Path="ConsAppJson/ConsAppJson.csproj" />
+  <Project Path="UtilsLib/UtilsLib.csproj" />
+</Solution>

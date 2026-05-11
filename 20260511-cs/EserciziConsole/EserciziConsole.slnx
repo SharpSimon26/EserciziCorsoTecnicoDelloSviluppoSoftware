@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsAppJson/ConsAppJson.csproj" />
+  <Project Path="ConsAppPokemon/ConsAppPokemon.csproj" />
+</Solution>

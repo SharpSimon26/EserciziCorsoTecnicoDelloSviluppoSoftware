@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ConsAppLibrerie/ConsAppLibrerie.csproj" />
+  <Project Path="Lib101/Lib101.csproj" />
+</Solution>

@@ -17,16 +17,33 @@ services:
     ports:
       - "127.0.0.1:5432:5432"
 
-  adminer:
-    image: adminer:latest
-    container_name: adminer
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
     restart: unless-stopped
     depends_on:
       - postgres
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      - SERVER_MODE=false
     networks:
       - postgres_network
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
     ports:
-      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:8082:80"
+
+#  adminer:
+#    image: adminer:latest
+#    container_name: adminer
+#    restart: unless-stopped
+#    depends_on:
+#      - postgres
+#    networks:
+#      - postgres_network
+#    ports:
+#      - "127.0.0.1:8081:8080"
 
 networks:
   postgres_network:
@@ -35,3 +52,5 @@ networks:
 volumes:
   postgres_data:
     name: postgresql-data
+  pgadmin_data:
+    name: pgadmin-data

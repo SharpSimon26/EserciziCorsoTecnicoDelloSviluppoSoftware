@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ConsAppSpectre/ConsAppSpectre.csproj" />
+  <Project Path="ConsAppSpectreSelection/ConsAppSpectreSelection.csproj" />
+  <Project Path="ConsAppSpectreSelection2/ConsAppSpectreSelection2.csproj" />
+  <Project Path="ConsAppSpectreSelection3/ConsAppSpectreSelection3.csproj" />
+</Solution>
