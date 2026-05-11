@@ -12,7 +12,8 @@ for (int i = 1; i <= 20; i++)
     }
 }
 */
-var pokes = new List<Pokemon>();
+// var pokes = new List<Pokemon>();
+var pokes = new List<Task<Pokemon>>();
 
 var pokeList = await PokemonClient.GetPokemonList();
 if (pokeList != null && pokeList.Results.Count() > 0)
@@ -28,12 +29,19 @@ if (pokeList != null && pokeList.Results.Count() > 0)
     await Task.WhenAll();
     */
 
-    await Task.WhenAll(pokeList.Results.Select(r => GetDetail(r.Url)));
+    //await Task.WhenAll(pokeList.Results.Select(r => GetDetail(r.Url)));
 
-    Console.WriteLine("Scaricati {0} Pokemon", pokes.Count);
+    foreach (var p in pokeList.Results)
+    {
+        pokes.Add(GetDetail(p.Url));
+    }
+
+    var pokemons = await Task.WhenAll(pokes);
+
+    Console.WriteLine("Scaricati {0} Pokemon", pokemons.Count());
 }
 
-async Task GetDetail(string pokemonUrl)
+async Task<Pokemon> GetDetail(string pokemonUrl)
 {
     while (true)
     {
@@ -45,8 +53,9 @@ async Task GetDetail(string pokemonUrl)
                 Console.WriteLine("Id: {0} - Name: {1} - Height: {2} - Weight: {3} - Base Experience: {4}", 
                     pokemon.Id, pokemon.Name, pokemon.Height, pokemon.Weight, pokemon.BaseExperience);
 
-                pokes.Add(pokemon);
-                break;
+                // pokes.Add(pokemon);
+                //break;
+                return pokemon;
             }            
         }
         catch (Exception ex)
