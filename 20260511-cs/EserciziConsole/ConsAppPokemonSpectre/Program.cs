@@ -31,20 +31,27 @@ while (true)
     {
         pokemonList = await pokemonClient.GetPokemonListAsync(selectedOption.Url);   
     }
-    else
+    else if (selectedOption is PokeOptionItem)
     {
         var pokemon = await pokemonClient.GetPokemonByUrlAsync(selectedOption.Url);
 
         if (pokemon != null)
         {
-            AnsiConsole.MarkupLine("Id: [cyan]{0}[/] - Name: [cyan]{1}[/] - Height: [cyan]{2}[/] - Weight: [cyan]{3}[/] - Base Experience: [cyan]{4}[/]", 
-                pokemon.Id, pokemon.Name.UcFirst(), pokemon.Height, pokemon.Weight, pokemon.BaseExperience);            
+            //AnsiConsole.MarkupLine("Id: [cyan]{0}[/] - Name: [cyan]{1}[/] - Height: [cyan]{2}[/] - Weight: [cyan]{3}[/] - Base Experience: [cyan]{4}[/]", 
+            //    pokemon.Id, pokemon.Name.UcFirst(), pokemon.Height, pokemon.Weight, pokemon.BaseExperience);
+            AnsiConsole.Write(pokemon.ToTable());
+            Console.ReadKey();
+            Console.Clear();
         }
         else
         {
             Console.WriteLine("Si è verificato un errore (Pokemon is null)");
+            break;
         }
-
+    }
+    else
+    {
+        // PokeOptionExit
         break;
-    }    
+    }
 }

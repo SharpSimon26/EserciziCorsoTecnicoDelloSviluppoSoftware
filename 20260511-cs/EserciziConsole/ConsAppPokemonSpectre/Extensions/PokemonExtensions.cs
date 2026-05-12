@@ -1,4 +1,5 @@
 using ConsAppPokemonSpectre.Models;
+using Spectre.Console;
 
 namespace ConsAppPokemonSpectre.Extensions;
 
@@ -30,6 +31,22 @@ public static class PokemonExtensions
             pokemonChoices.Add(new PokeOptionNav() { Name = "-> Successivo ->", Url = pokemonList.Next });
         }
 
+        pokemonChoices.Add(new PokeOptionExit() { Name = "----- Esci -----" });
+
         return pokemonChoices;
+    }
+
+    /// <summary>
+    /// Converte l'oggetto in una tabella per visualizzare i dati
+    /// </summary>
+    /// <param name="pokemon"></param>
+    /// <returns></returns>
+    public static Table ToTable(this Pokemon pokemon)
+    {
+        var table = new Table();
+        table.AddColumns("Id", "Name", "Height", "Weight");
+        table.AddRow(pokemon.Id.ToString(), pokemon.Name.UcFirst(), pokemon.Height.ToString(), pokemon.Weight.ToString());
+
+        return table;
     }
 }
