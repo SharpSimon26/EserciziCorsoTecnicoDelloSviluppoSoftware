@@ -3,8 +3,9 @@ using ConsAppPokemonSpectre.Extensions;
 using ConsAppPokemonSpectre.Models;
 using Spectre.Console;
 
-var pokemonList = await PokemonClient.GetPokemonListAsync();
-var pokemonChoices = new List<IOperazione>();
+using var pokemonClient = new PokemonClient();
+var pokemonList = await pokemonClient.GetPokemonListAsync();
+var pokemonChoices = new List<Operazione>();
 
 while (true)
 {
@@ -18,25 +19,25 @@ while (true)
     pokemonChoices = pokemonList.ToOptionList();
 
     var selectedOption = await AnsiConsole.PromptAsync(
-        new SelectionPrompt<IOperazione>()
+        new SelectionPrompt<Operazione>()
             .Title("Scegli il Pokemon")
             .MoreChoicesText("[grey](Move up and down to see more pokemons)[/]")
             .HighlightStyle(new Style(Color.Cyan1, decoration: Decoration.Bold))
             .AddChoices(pokemonChoices)
-            .UseConverter(p => p.Name.UcFirst())
+            .UseConverter(p => p.Name)
     );
 
     if (selectedOption is PokeOptionNav)
     {
-        pokemonList = await PokemonClient.GetPokemonListAsync(selectedOption.Url);   
+        pokemonList = await pokemonClient.GetPokemonListAsync(selectedOption.Url);   
     }
     else
     {
-        var pokemon = await PokemonClient.GetPokemonByUrlAsync(selectedOption.Url);
+        var pokemon = await pokemonClient.GetPokemonByUrlAsync(selectedOption.Url);
 
         if (pokemon != null)
         {
-            Console.WriteLine("Id: {0} - Name: {1} - Height: {2} - Weight: {3} - Base Experience: {4}", 
+            AnsiConsole.MarkupLine("Id: [cyan]{0}[/] - Name: [cyan]{1}[/] - Height: [cyan]{2}[/] - Weight: [cyan]{3}[/] - Base Experience: [cyan]{4}[/]", 
                 pokemon.Id, pokemon.Name.UcFirst(), pokemon.Height, pokemon.Weight, pokemon.BaseExperience);            
         }
         else

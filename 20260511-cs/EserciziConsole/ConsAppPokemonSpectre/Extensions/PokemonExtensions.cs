@@ -9,21 +9,21 @@ public static class PokemonExtensions
     /// </summary>
     /// <param name="pokemonList">Risposta dell' API</param>
     /// <returns>Elenco con eventuali opzioni di navigazione per il menù</returns>
-    public static List<IOperazione> ToOptionList(this PokeList pokemonList)
+    public static List<Operazione> ToOptionList(this PokeList pokemonList)
     {
         if (!pokemonList.Results.Any())
         {
             return [];
         }
 
-        var pokemonChoices = new List<IOperazione>();
+        var pokemonChoices = new List<Operazione>();
 
         if (pokemonList.Previous != null)
         {
             pokemonChoices.Add(new PokeOptionNav() { Name = "<- Precedente <-", Url = pokemonList.Previous });
         }
 
-        pokemonChoices.AddRange(pokemonList.Results.Select(p => new PokeOptionItem(){ Name = p.Name, Url = p.Url }));
+        pokemonChoices.AddRange(pokemonList.Results.Select(p => new PokeOptionItem(){ Name = p.Name.UcFirst(), Url = p.Url }));
 
         if (pokemonList.Next != null)
         {
