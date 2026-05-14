@@ -4,39 +4,60 @@ namespace ConsAppTodo.Services;
 
 public class TodoService
 {
-    private readonly List<Todo> todos;
+    private readonly List<Todo> _todos;
+    private int newId;
 
     public TodoService()
     {
-        todos = [];
+        _todos = [];
+        newId = 1;
     }
 
     public IEnumerable<Todo> GetAll()
     {
-        return todos;
+        return _todos.Select(m => new Todo()
+        {
+            Id = m.Id,
+            Text = m.Text,
+            Done = m.Done
+        });
     }
 
     public Todo? GetById(int id)
     {
-        return todos.FirstOrDefault(m => m.Id == id);
+        var todo = _todos.FirstOrDefault(m => m.Id == id);
+        if (todo == null) return null;
+
+        return new Todo()
+        {
+            Id = todo.Id,
+            Text = todo.Text,
+            Done = todo.Done
+        };
     }
 
-    public Todo Add(string testo, bool done = false)
+    public int Add(string testo, bool done = false)
     {
-        var newId = todos.OrderByDescending(m => m.Id).FirstOrDefault()?.Id + 1 ?? 1;
-        var newTodo = new Todo(){ Id = newId, Text = testo, Done = done };
-        todos.Add(newTodo);
+        var newTodo = new Todo()
+        { 
+            Id = newId, 
+            Text = testo, 
+            Done = done
+        };
+
+        _todos.Add(newTodo);
+        newId++;
     
-        return newTodo;
+        return newTodo.Id;
     }
 
     public bool Update(int id, string testo, bool done)
     {
-        var todoIndex = todos.FindIndex(m => m.Id == id);
+        var todoIndex = _todos.FindIndex(m => m.Id == id);
         if (todoIndex > -1)
         {
-            todos[todoIndex].Text = testo;
-            todos[todoIndex].Done = done;
+            _todos[todoIndex].Text = testo;
+            _todos[todoIndex].Done = done;
 
             return true;
         }
@@ -48,7 +69,7 @@ public class TodoService
 
     public bool Delete(int id)
     {
-        var num = todos.RemoveAll(m => m.Id == id);
+        var num = _todos.RemoveAll(m => m.Id == id);
         return num > 0;
     }
 }
