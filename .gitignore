@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 
 # Custom rules
 .directory
+*.csproj.lscache
