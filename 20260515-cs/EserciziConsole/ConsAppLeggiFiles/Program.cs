@@ -1,29 +1,28 @@
-﻿var folderPath = "Contents";
+﻿using ConsAppLeggiFiles.Models;
+
+var folderPath = "Contents";
 var currentDir = Directory.GetCurrentDirectory();
 var files = Directory.GetFiles(Path.Join(currentDir, folderPath), "*.txt");
 
 if (files.Any())
 {
-    var fileLines = new Dictionary<string, int>();
-
-    await Task.WhenAll(files.Select(async filePath =>
+    var fileItems = await Task.WhenAll(files.Select(async filePath =>
     {
         var fileName = Path.GetFileName(filePath);
+        var numLines = -1;
 
         try
         {
-            var numLines = (await File.ReadAllLinesAsync(filePath)).Length;
-            fileLines.TryAdd(fileName, numLines);
+            numLines = (await File.ReadAllLinesAsync(filePath)).Length;
         }
-        catch (Exception)
-        {
-            fileLines.TryAdd(fileName, -1);
-        }
+        catch (Exception) { /* Intercetta eventuali eccezioni */ }
+     
+        return new FileItem() { FileName = fileName, NumLines = numLines };
     }));
 
-    foreach (var item in fileLines)
+    foreach (var item in fileItems)
     {
-        Console.WriteLine(item.Key + " - " + item.Value + " lines");
+        Console.WriteLine(item.FileName + " - " + item.NumLines + " lines");
     }
 }
 else
