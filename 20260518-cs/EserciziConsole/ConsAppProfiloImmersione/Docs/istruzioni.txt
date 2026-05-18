@@ -1,0 +1,22 @@
+capienza bombola 15 L
+pressione caricata 200 atm
+
+200x15 litri utili in superficie
+
+consumo superficiale 20 L / minuto
+* tempo
+* (profondità / 10 + 1)
+
+1° colonna tempo
+2° colonna profondità
+
+3350 litri soluzione
+
+C     Consumo
+SAC   Surface Air Consumption
+time  durata immersione o parte
+Depth / 10 + 1  Pressione alla profondità
+
+Creare un software in grado di calcolare il consumo in litri del profilo di immersione in allegato.
+
+la formula per calcolare il consumo in litri per un certo tempo ad una data profondità è: C = SAC * time * (Depth / 10 + 1)

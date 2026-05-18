@@ -1,0 +1,31 @@
+Stableford
+
+HCP Handicap Index del giocatore da 0 (scratch) a 54
+Handicap della buca 
+
+PAR numero dei colpi
+PAR 4 -> 4 colpi -> 2 punti
+PAR 4 -> 3 colpi -> 3 punti
+PAR 4 -> 2 colpi -> 4 punti
+PAR 4 -> 1 colpi -> 5 punti
+
+5  5  2
+5  4  3
+5  3  4
+5  2  5
+5  1  6    4 punti di buca + 2
+
+HCP index del giocatore 22
+Buche 18
+
+22 / 18 -> divisione intera +1 colpo a buca
+resto della divisione intera -> 4 colpi da distribuire
+4 colpi da distribuire sulle buche più difficili con HCP basso
+
+
+Assegnazione punti
+2 base
++ par buca
+- strokes (numero di colpi)
+
+handicap giocatore: 54  buche: 9  ->  (54/18) * 9 = 27  ->  27 / 9 = 3 colpi in più a ogni buca
