@@ -7,7 +7,6 @@ public static class CsvReader
 {
     public static async Task<IEnumerable<DivingLogEntry>> ParseFile(string fileName)
     {
-        
         var divingLogEntries = new List<DivingLogEntry>();
 
         var divingLogTxt = (await File.ReadAllLinesAsync(Path.Join(Directory.GetCurrentDirectory(), "Contents", fileName)))?.Skip(1);
