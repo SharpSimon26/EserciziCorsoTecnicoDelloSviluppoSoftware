@@ -1,7 +1,7 @@
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: mssql_2025
+    container_name: mssql-2025
     restart: unless-stopped
     environment:
       - ACCEPT_EULA=Y
