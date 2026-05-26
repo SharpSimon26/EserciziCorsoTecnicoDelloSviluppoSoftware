@@ -1,0 +1,10 @@
+Dato il file csv in allegato, il quale rappresenta il percorso del sentiero Rilke mappato per coordinate geografiche (latitudine, longitudine ed elevamento s.l.m.) progettare una console application in grado di stampare a schermo la lunghezza totale del percorso.
+Per il calcolo utilizzare la funzione "DistanceInMeters" fornita in allegato.
+
+Bonus: mappare ogni singolo punto del percorso in un oggetto ad hoc "Coord" che esponga un metodo con la seguente firma: 
+
+double Distance(Coord other) 
+
+che calcoli la distanze tra il punto in questione ed un altro punto.
+
+Al termine quanto prodotto dovrà essere caricato su questo compito sotto forma di file zip nominato: <cognome>_<nome>.zip
