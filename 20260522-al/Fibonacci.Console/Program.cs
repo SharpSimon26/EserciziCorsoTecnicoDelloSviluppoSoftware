@@ -60,7 +60,7 @@ static long FibonacciIterativo(int n)
 
 static IEnumerable<long> FibonacciSerie(int n)
 {
-    if (n < 1) throw new ArgumentException("Inserisci un valore positivo maggiore di 0");
+    if (n < 1) throw new ArgumentException("Specificare un valore positivo maggiore di 0");
 
     long a = 0;
     long b = 1;
@@ -80,4 +80,5 @@ foreach (var num in FibonacciSerie(50))
 {
     Console.Write($"{num:n0}  ");
 }
+
 Console.WriteLine();
