@@ -1,0 +1,32 @@
+@page
+@model StudentsModel
+@{
+    ViewData["Title"] = "Studenti";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Provola</p>
+
+@DateTime.Now
+
+@{/* Singolo passaggio */ }
+
+<h2>@(15 + 18)</h2>
+
+@{/* In 2 passaggi */}
+
+@{
+    int a = 15;
+    int b = 18;
+}
+
+<h2>@(a + b)</h2>
+
+@{/* Ciclo for */}
+
+<ul>
+@for(int i = 0; i < 10; i++)
+{
+    <li>@i</li>
+}
+</ul>

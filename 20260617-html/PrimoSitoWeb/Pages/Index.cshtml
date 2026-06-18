@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="chess-board">
+    @for(int i = 0; i < 8; i++)
+    {
+        <div class="chess-row">
+        @for(int j = 0; j < 8; j++)
+        {
+            string colore = string.Empty;
+            if ((i % 2 == 0 && j % 2 == 0) || (i % 2 != 0 && j % 2 != 0 ))
+            {
+                colore = "white";
+            }
+            else
+            {
+                colore = "black";
+            }            
+
+            <div class="@colore">@i,@j</div>
+        }
+        </div>
+    }
+</div>    
+
