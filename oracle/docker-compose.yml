@@ -1,0 +1,37 @@
+services:
+  oracledb:
+    image: container-registry.oracle.com/database/free:latest-lite
+    container_name: oracledbfree
+    restart: unless-stopped
+
+    environment:
+      ORACLE_PWD: ${ORACLE_PWD}
+      ORACLE_CHARACTERSET: "AL32UTF8"
+
+    healthcheck:
+      test: ["CMD", "/opt/oracle/checkDBStatus.sh"]
+      interval: 1m
+      timeout: 30s
+      retries: 3
+      start_period: 15m
+
+    networks:
+      - docker_network
+
+    volumes:
+      - oracle_data:/opt/oracle/oradata
+      - ./startup:/opt/oracle/scripts/startup
+
+    ports:
+      - "127.0.0.1:1521:1521"
+      - "127.0.0.1:5500:5500"
+
+networks:
+  docker_network:
+    name: docker_network
+    driver: bridge
+
+volumes:
+  oracle_data:
+    name: oracle-data
+    driver: local
