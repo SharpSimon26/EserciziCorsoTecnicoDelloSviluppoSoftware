@@ -1,0 +1,13 @@
+p, h2, pre {
+    color: coral;
+}
+
+p {
+    color: green;
+}
+
+.mario > li {
+    color: red;
+    border: 1px solid black;
+    margin: 20px;
+}
