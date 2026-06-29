@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h1>
+    @Model.Somma(25, 35)
+</h1>
+
+<h1>
+    @Model.TheAnswerOfUniverseAndEverything
+</h1>
+
+@foreach(var todo in @Model.Todos)
+{
+    <div>@todo.Description</div>
+}
