@@ -1,0 +1,31 @@
+@using Di101.Web.Models
+@model IEnumerable<TodoItem>
+
+<div class="container">
+    @foreach(var item in @Model)
+    {
+        <div class="row">
+            <div class="col-sm-1">
+                @item.Id 
+            </div>
+            <div class="col">
+                <span class="@(item.Done ? "text-success" : "text-danger")">@item.Text</span>
+            </div>
+            <div class="col-sm-2">
+                <a asp-route-action="toggle" asp-route-id="@item.Id">
+                    @(item.Done ? "Fatto" : "Da fare")
+                </a>
+            </div>
+            <div class="col-sm-2">
+                <a asp-route-action="edit" asp-route-id="@item.Id">
+                    Modifica
+                </a>
+            </div>
+            <div class="col-sm-2">
+                <a asp-route-action="delete" asp-route-id="@item.Id">
+                    Elimina
+                </a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PokeApi.Client/PokeApi.Client.csproj" />
+  <Project Path="PokeApi.Web/PokeApi.Web.csproj" />
+</Solution>

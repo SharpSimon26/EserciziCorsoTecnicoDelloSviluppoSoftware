@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Todo</h1>
+    @*
+    <ul class="list-unstyled">
+        <li>@Model.Counter.GetCount() - @Model.Counter.MyGuid</li>
+        <li>@Model.Counter2.GetCount() - @Model.Counter2.MyGuid</li>
+    </ul>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    *@
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <partial name="_TodoListPartial" model="@Model.Todos" />
+        </div>
+        <div class="col-md-3">
+            <partial name="_TodoFormPartial" model="@Model.TodoForm" />
+        </div>
+    </div>
+</div>

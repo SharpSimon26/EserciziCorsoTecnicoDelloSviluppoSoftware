@@ -1,0 +1,19 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Pokemon";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<ul class="list-group">
+    @foreach(var result in @Model.pokeList.Results)
+    {
+        <li class="list-group-item">
+            <a asp-page="/PokemonDetail" asp-route-id="@result.id">@result.name</a>
+        </li>
+    }
+</ul>
+
+<a asp-page="Index" asp-route-pagenum="@Model.pokeList.PagePrev">Previous</a>
+<a asp-page="Index" asp-route-pagenum="@Model.pokeList.PageNext">Next</a>

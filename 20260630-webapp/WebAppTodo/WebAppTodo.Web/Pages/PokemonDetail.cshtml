@@ -1,0 +1,10 @@
+﻿@page
+@model PokemonDetailModel
+@{
+    ViewData["Title"] = "Pokemon Detail";
+}
+<h1>@Model.pokemon.name</h1>
+
+<img class="d-block" src="@Model.pokemon.sprites.front_default" alt="@Model.pokemon.name" />
+
+<a asp-page="/Pokemon">Back to list</a>

@@ -1,0 +1,9 @@
+﻿@page "{id}"
+@model WebAppTodo.Web.Pages.DettaglioModel
+@{
+    ViewData["Title"] = "Dettaglio";
+}
+
+<h1 class="p-3 border border-4 @(Model.todo.Done ? "border-success" : "border-danger" )">@Model.todo.Text</h1>
+
+<a class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover" asp-page="/Index">Torna alla home</a>
