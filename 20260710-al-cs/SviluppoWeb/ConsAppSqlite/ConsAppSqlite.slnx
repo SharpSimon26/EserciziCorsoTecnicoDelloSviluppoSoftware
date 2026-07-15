@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Sqlite.Console/Sqlite.Console.csproj" />
+  <Project Path="Sqlite.DataAccess/Sqlite.DataAccess.csproj" />
+</Solution>
