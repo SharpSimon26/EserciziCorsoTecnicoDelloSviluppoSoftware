@@ -1,0 +1,21 @@
+﻿@page
+@model CalcolatriceModel
+@{
+    ViewData["Title"] = "Calcolatrice";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <partial name="_CalcolatriceFormPartial" model="@Model.CalcolatriceForm" />
+            @if (Model.Somma != null)
+            {
+                <span class="display-4 text-success">Il risultato è: @Model.Somma</span>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

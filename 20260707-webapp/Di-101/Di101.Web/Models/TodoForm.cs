@@ -8,4 +8,6 @@ public class TodoForm
 
     [Required]
     public string Text { get; set; } = string.Empty;
+
+    public bool Done { get; set; }
 }

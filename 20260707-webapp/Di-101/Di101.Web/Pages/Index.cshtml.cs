@@ -37,7 +37,7 @@ public class IndexModel : PageModel
 
                     if (todoItem != null)
                     {
-                        TodoForm = new TodoForm { Id = todoItem.Id, Text = todoItem.Text };
+                        TodoForm = new TodoForm { Id = todoItem.Id, Text = todoItem.Text, Done = todoItem.Done };
                     }
                     else
                     {
@@ -70,7 +70,7 @@ public class IndexModel : PageModel
             }
             else
             {
-                await _todoService.UpdateTodo(todoForm.Id, todoForm.Text);
+                await _todoService.UpdateTodo(todoForm.Id, todoForm.Text, todoForm.Done);
             }
         }
 

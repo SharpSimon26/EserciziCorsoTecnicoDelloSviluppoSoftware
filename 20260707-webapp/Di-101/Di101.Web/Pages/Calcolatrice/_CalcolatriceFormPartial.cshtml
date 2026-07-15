@@ -1,0 +1,16 @@
+@using Di101.Web.Models;
+@model CalcolatriceForm
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="@Model.Valore1" class="form-label">Primo numero</label>
+        <input asp-for="@Model.Valore1" class="form-control" type="text" />
+        <span asp-validation-for="@Model.Valore1" class="form-text text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="@Model.Valore2" class="form-label">Secondo numero</label>
+        <input asp-for="@Model.Valore2" class="form-control" type="text" />
+        <span asp-validation-for="@Model.Valore2" class="form-text text-danger"></span>
+    </div>
+    <input type="submit" id="btn-submit" class="btn btn-primary" value="Somma" />
+</form>

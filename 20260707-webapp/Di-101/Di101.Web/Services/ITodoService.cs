@@ -8,7 +8,7 @@ public interface ITodoService
     Task<TodoItem?> GetTodoById(int id);
     void AddTodo(string text);
     Task ToggleTodo(int id);
-    Task UpdateTodo(int id, string text);
+    Task UpdateTodo(int id, string text, bool done);
     Task UpdateTodo(TodoItem todo);
     Task DeleteTodo(int id);
 }

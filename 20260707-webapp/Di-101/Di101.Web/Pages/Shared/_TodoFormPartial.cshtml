@@ -6,11 +6,18 @@
         <label for="txt-text" class="form-label">Descrizione</label>
     </div>
     <div class="mb-3">
-        <input asp-for="@Model.Text" type="text" id="txt-text" name="Text" class="form-control" />
+        <input asp-for="@Model.Text" type="text" id="txt-text" class="form-control" />
         <span asp-validation-for="@Model.Text"></span>
     </div>
     @if (@Model.Id != 0)
     {
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" asp-for="@Model.Done" />
+                <label class="form-check-label" for="Done">Fatto ?</label>
+            </div>
+            <span asp-validation-for="@Model.Done"></span>
+        </div>
         <input type="hidden" asp-for="@Model.Id" />
     }
     <input type="submit" id="btn-submit" class="btn btn-primary" value="@(Model.Id == 0 ? "Nuovo" : "Modifica")" />

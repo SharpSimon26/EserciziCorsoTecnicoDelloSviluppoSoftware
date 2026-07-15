@@ -52,13 +52,14 @@ public class TodoService : ITodoService
         await UpdateTodo(todo);
     }
 
-    public async Task UpdateTodo(int id, string text)
+    public async Task UpdateTodo(int id, string text, bool done)
     {
         int index = _todos.FindIndex(t => t.Id == id);
 
         if(index >= 0)
         {
             _todos[index].Text = text;
+            _todos[index].Done = done;
         }
     }
 
