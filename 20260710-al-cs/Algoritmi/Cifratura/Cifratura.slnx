@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CifrarioDiCesare.Console/CifrarioDiCesare.Console.csproj" />
+  <Project Path="CifrarioGriglia.Console/CifrarioGriglia.Console.csproj" />
+  <Project Path="IalCypher.Lib/IalCypher.Lib.csproj" />
+</Solution>
