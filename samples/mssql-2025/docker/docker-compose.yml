@@ -8,16 +8,17 @@ services:
       - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
       - MSSQL_PID=Developer
     networks:
-      - microsoft_network
+      - docker_network
     volumes:
       - mssql_data:/var/opt/mssql
     ports:
       - "127.0.0.1:1433:1433"
 
 networks:
-  microsoft_network:
-    name: microsoft_network
+  docker_network:
+    name: docker_network
     driver: bridge
+    external: true
 
 volumes:
   mssql_data:

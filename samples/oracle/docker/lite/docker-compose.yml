@@ -24,7 +24,17 @@ services:
 
     ports:
       - "127.0.0.1:1521:1521"
-      - "127.0.0.1:5500:5500"
+
+  adminer:
+    image: adminer
+    container_name: oracleadminer
+    restart: unless-stopped
+    environment:
+      - ADMINER_DEFAULT_SERVER=oci8
+    networks:
+      - docker_network
+    ports:
+      - "127.0.0.1:8082:8080"
 
 networks:
   docker_network:

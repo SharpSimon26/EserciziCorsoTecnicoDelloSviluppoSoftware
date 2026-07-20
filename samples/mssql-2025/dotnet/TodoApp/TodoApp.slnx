@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="TodoApp.DataAccess/TodoApp.DataAccess.csproj" />
+  <Project Path="TodoApp.Web/TodoApp.Web.csproj" />
+</Solution>
