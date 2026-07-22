@@ -1,0 +1,12 @@
+@page
+@model AddModel
+@{
+    ViewData["Title"] = "Nuovo";
+}
+
+<h4 class="mb-3">Nuovo Todo</h4>
+<partial name="_TodoFormPartial" model="@Model.TodoForm" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

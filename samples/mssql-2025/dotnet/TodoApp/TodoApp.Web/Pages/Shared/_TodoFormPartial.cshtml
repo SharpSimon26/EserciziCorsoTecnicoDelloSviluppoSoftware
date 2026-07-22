@@ -1,0 +1,30 @@
+@using TodoApp.Web.Forms
+@model TodoForm
+
+<form method="post">
+    <div class="mb-3 row">
+        <div class="col-12">
+            <label for="txt-text" class="form-label">Descrizione</label>
+            <input asp-for="@Model.Description" type="text" id="txt-text" class="form-control" />
+            <span asp-validation-for="@Model.Description"></span>            
+        </div>
+    </div>
+    @if (@Model.Id != 0)
+    {
+        <div class="mb-3 row">
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="@Model.Done" />
+                    <label class="form-check-label" for="Done">Fatto ?</label>
+                </div>
+                <span asp-validation-for="@Model.Done"></span>
+            </div>
+            <input type="hidden" asp-for="@Model.Id" />        
+        </div>
+    }
+    <div class="mb-3 row">
+        <div class="col-12">
+            <input type="submit" id="btn-submit" class="btn btn-primary" value="@(Model.Id == 0 ? "Nuovo" : "Modifica")" />
+        </div>        
+    </div>
+</form>

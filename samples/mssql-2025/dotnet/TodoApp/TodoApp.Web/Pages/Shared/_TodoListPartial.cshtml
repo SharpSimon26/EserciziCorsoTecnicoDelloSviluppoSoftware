@@ -1,0 +1,40 @@
+@using TodoApp.DataAccess.Models
+@model IEnumerable<Todo>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Descrizione</th>
+            <th></th>
+            <th></th>
+            <th></th>            
+        </tr>
+    </thead>
+    <tbody>
+    @foreach(var item in @Model)
+    {
+        <tr>
+            <td>@item.Id </td>
+            <td>
+                <span class="@(item.Done ? "text-success" : "text-danger")">@item.Description</span>
+            </td>
+            <td>
+                <a asp-page="Toggle" asp-route-id="@item.Id">
+                    @(item.Done ? "Fatto" : "Da fare")
+                </a>
+            </td>
+            <td>
+                <a asp-page="Edit" asp-route-id="@item.Id">
+                    Modifica
+                </a>
+            </td>
+            <td>
+                <a asp-page="Delete" asp-route-id="@item.Id">
+                    Elimina
+                </a>
+            </td>            
+        </tr>
+    }
+    </tbody>
+</table>
