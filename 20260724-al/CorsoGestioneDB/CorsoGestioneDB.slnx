@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="CorsoGestioneDB.Abstractions/CorsoGestioneDB.Abstractions.csproj" />
+  <Project Path="CorsoGestioneDB.Application/CorsoGestioneDB.Application.csproj" />
+  <Project Path="CorsoGestioneDB.Domain/CorsoGestioneDB.Domain.csproj" />
+  <Project Path="CorsoGestioneDB.Console/CorsoGestioneDB.Console.csproj" />
+  <Project Path="CorsoGestioneDB.Infrastructure/CorsoGestioneDB.Infrastructure.csproj" />
+</Solution>
