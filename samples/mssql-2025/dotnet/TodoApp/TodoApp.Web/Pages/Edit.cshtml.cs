@@ -1,10 +1,8 @@
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TodoApp.DataAccess.Repositories;
 using TodoApp.Web.ExtensionMethods;
 using TodoApp.Web.Forms;
-using TodoApp.Web.Models;
 
 namespace TodoApp.Web.Pages;
 

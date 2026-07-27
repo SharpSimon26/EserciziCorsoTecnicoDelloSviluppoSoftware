@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using TodoApp.DataAccess.Models;
 using TodoApp.DataAccess.Repositories;
 using TodoApp.Web.ExtensionMethods;
 using TodoApp.Web.Forms;
