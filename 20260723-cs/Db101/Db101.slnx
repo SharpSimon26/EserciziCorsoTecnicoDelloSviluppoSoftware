@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Db101.Console/Db101.Console.csproj" />
+  <Project Path="Db101.MSSQL.Console/Db101.MSSQL.Console.csproj" />
+</Solution>
