@@ -1,0 +1,41 @@
+CREATE TABLE [dbo].[StagingSales] (
+    [OrderLineID]        NVARCHAR (50)   NOT NULL,
+    [OrderID]            NVARCHAR (50)   NOT NULL,
+    [OrderDate]          DATE            NOT NULL,
+    [CustomerID]         NVARCHAR (50)   NOT NULL,
+    [CustomerFirstName]  NVARCHAR (50)   NOT NULL,
+    [CustomerLastName]   NVARCHAR (50)   NOT NULL,
+    [CustomerEmail]      NVARCHAR (50)   NOT NULL,
+    [CustomerPhone]      NVARCHAR (50)   NOT NULL,
+    [CustomerCity]       NVARCHAR (50)   NOT NULL,
+    [CustomerProvince]   NVARCHAR (50)   NOT NULL,
+    [CustomerRegion]     NVARCHAR (50)   NOT NULL,
+    [CustomerSegment]    NVARCHAR (50)   NOT NULL,
+    [CustomerSignupDate] DATE            NOT NULL,
+    [SalesRepID]         NVARCHAR (50)   NOT NULL,
+    [SalesRepFirstName]  NVARCHAR (50)   NOT NULL,
+    [SalesRepLastName]   NVARCHAR (50)   NOT NULL,
+    [SalesRepEmail]      NVARCHAR (50)   NOT NULL,
+    [SalesArea]          NVARCHAR (50)   NOT NULL,
+    [ProductCode]        NVARCHAR (50)   NOT NULL,
+    [ProductName]        NVARCHAR (50)   NOT NULL,
+    [Category]           NVARCHAR (50)   NOT NULL,
+    [Brand]              NVARCHAR (50)   NOT NULL,
+    [UnitPriceEUR]       FLOAT (53)      NOT NULL,
+    [Quantity]           INT             NOT NULL,
+    [DiscountPct]        DECIMAL  (5, 2) NOT NULL,
+    [WarehouseID]        NVARCHAR (50)   NOT NULL,
+    [WarehouseName]      NVARCHAR (50)   NOT NULL,
+    [WarehouseCity]      NVARCHAR (50)   NOT NULL,
+    [WarehouseProvince]  NVARCHAR (50)   NOT NULL,
+    [SalesChannel]       NVARCHAR (50)   NOT NULL,
+    [PaymentMethod]      NVARCHAR (50)   NOT NULL,
+    [OrderStatus]        NVARCHAR (50)   NOT NULL,
+    [DeliveryDate]       DATE            NULL,
+    [ShippingCostEUR]    DECIMAL (10, 2) NOT NULL,
+    [LineRevenueEUR]     DECIMAL (10, 2) NOT NULL
+);
+
+
+GO
+

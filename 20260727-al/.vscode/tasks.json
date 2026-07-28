@@ -1,0 +1,21 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "sqlproj: Build DatabaseProjectEsercizioDb02",
+			"type": "process",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"c:/Users/09ts-software/source/repos/SharpSimon26/EserciziCorsoTecnicoDelloSviluppoSoftware/20260727-al/EsercizioDb02.Db/DatabaseProjectEsercizioDb02/DatabaseProjectEsercizioDb02.sqlproj"
+			],
+			"problemMatcher": "$sqlproj-problem-matcher",
+			"isBackground": true,
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "Compilare il progetto SQL DatabaseProjectEsercizioDb02"
+		}
+	]
+}
