@@ -20,7 +20,7 @@ public class TodoRepository : ITodoRepository
     {
         try
         {
-            using IDbConnection db = _connectionFactory.CreateConnection();
+            var db = await _connectionFactory.CreateConnection();
             var sql = "select id, description, done from todos";
             var todos = await db.QueryAsync<Todo>(sql);
             _logger.LogInformation("{0} Todo", todos.Count());
@@ -39,7 +39,7 @@ public class TodoRepository : ITodoRepository
     {
         try
         {
-            using IDbConnection db = _connectionFactory.CreateConnection();
+            var db = await _connectionFactory.CreateConnection();
             var sql = "select id, description, done from todos where id = @id";
             var data = new { id = id };
             var todo = await db.QueryFirstOrDefaultAsync<Todo>(sql, data);
@@ -58,7 +58,7 @@ public class TodoRepository : ITodoRepository
     {
         try
         {
-            using IDbConnection db = _connectionFactory.CreateConnection();
+            var db = await _connectionFactory.CreateConnection();
             var sql = "insert into todos (description) values (@description)";
             var data = new { description = description };
             var affectedRows = await db.ExecuteAsync(sql, data);
@@ -78,7 +78,7 @@ public class TodoRepository : ITodoRepository
     {
         try
         {
-            using IDbConnection db = _connectionFactory.CreateConnection();
+            var db = await _connectionFactory.CreateConnection();
             var sql = "update todos set description = @description, done = @done where id = @id";
             var data = new { id = id, description = description, done = done };
             var affectedRows = await db.ExecuteAsync(sql, data);
@@ -98,7 +98,7 @@ public class TodoRepository : ITodoRepository
     {
         try
         {
-            using IDbConnection db = _connectionFactory.CreateConnection();
+            var db = await _connectionFactory.CreateConnection();
             var sql = "delete from todos where id = @id";
             var data = new { id = id };
             var affectedRows = await db.ExecuteAsync(sql, data);

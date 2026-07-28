@@ -1,14 +1,10 @@
 using TodoApp.DataAccess;
-using TodoApp.DataAccess.Models;
 using TodoApp.DataAccess.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var mssqlDbSettings = builder.Configuration.GetRequiredSection("MSSqlDbSettings").Get<MSSqlDbSettings>() ??
-    throw new InvalidOperationException("Impossibile trovare i dati per l'accesso al database");
-
 // Add services to the container.
-builder.Services.AddSingleton(new DbConnectionFactory(mssqlDbSettings));
+builder.Services.AddScoped<DbConnectionFactory>();
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 builder.Services.AddRazorPages();
