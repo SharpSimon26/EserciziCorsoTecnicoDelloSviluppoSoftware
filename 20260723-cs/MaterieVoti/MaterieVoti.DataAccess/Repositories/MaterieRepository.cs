@@ -16,16 +16,25 @@ public class MaterieRepository : IMaterieRepository
     public async Task<IEnumerable<Subject>> GetMaterie()
     {
         var conn = await _connectionFactory.CreateConnection();
-        var sql = "select * from materie";
+        var sql = "select * from Materie order by Materia";
         var mats = await conn.QueryAsync<Subject>(sql);
 
         return mats;
     }
 
+    public async Task<Subject?> GetMateriaById(int materiaId)
+    {
+        var conn = await _connectionFactory.CreateConnection();
+        var sql = "select * from Materie where Materia = @materiaId";
+        var materia = await conn.QueryFirstOrDefaultAsync<Subject>(sql, new { materiaId });
+
+        return materia;
+    }
+
     public async Task<IEnumerable<Score>> GetVoti()
     {
         var conn = await _connectionFactory.CreateConnection();
-        var sql = "select * from Voti order by DataInserimento";
+        var sql = "select * from Voti order by DataInserimento desc";
         var scores = await conn.QueryAsync<Score>(sql);
 
         return scores;
@@ -40,7 +49,6 @@ public class MaterieRepository : IMaterieRepository
         return scores;
     }
 
-    // Metodo a uso didattico, non performante
     public async Task<IEnumerable<SubjectWithScoresViewModel>> GetScores1()
     {
         var materie = await GetMaterie();
@@ -62,11 +70,11 @@ public class MaterieRepository : IMaterieRepository
     {
         var materie = await GetMaterie();
         var voti = await GetVoti();
-        var materieConAlmenoUnVoto = materie.Where(m => voti.Any(t => t.MateriaId == m.Id));
+        //var materieConAlmenoUnVoto = materie.Where(m => voti.Any(t => t.MateriaId == m.Id));
 
-        var materieConVoti = materieConAlmenoUnVoto.Select(m => new SubjectWithScoresViewModel2
+        var materieConVoti = materie.Select(m => new SubjectWithScoresViewModel2
         {
-            IdMatera = m.Id,
+            IdMateria = m.Id,
             Materia = m.Materia,
             Scores = voti.Where(s => s.MateriaId == m.Id)
         });
@@ -81,5 +89,32 @@ public class MaterieRepository : IMaterieRepository
         var mats = await conn.QueryAsync<SubjectWithScoresViewModel>(sql);
 
         return mats;
+    }
+
+    public async Task<int> AddVoto(int materiaId, float voto, DateTime dataVoto)
+    {
+        var conn = await _connectionFactory.CreateConnection();
+        var sql = "insert into Voti (MateriaId, Voto, DataInserimento) values (@materiaId, @voto, @dataVoto)";
+        var affectedRows = await conn.ExecuteAsync(sql, new { materiaId, voto, dataVoto });
+
+        return affectedRows;
+    }
+
+    public async Task<int> UpdateVoto(int votoId, float voto, DateTime dataVoto)
+    {
+        var conn = await _connectionFactory.CreateConnection();
+        var sql = "update Voti set Voto = @voto, DataInserimento = @dataVoto where Id = @votoId";
+        var affectedRows = await conn.ExecuteAsync(sql, new { voto, dataVoto, votoId });
+
+        return affectedRows;
+    }
+
+    public async Task<int> DeleteVoto(int votoId)
+    {
+        var conn = await _connectionFactory.CreateConnection();
+        var sql = "delete from Voti where Id = @votoId";
+        var affectedRows = await conn.ExecuteAsync(sql, new { votoId });
+
+        return affectedRows;
     }
 }

@@ -24,24 +24,40 @@
         if (scoreCount > 1)
         {
             <tr>
-                <td rowspan="@(scoreCount + 1)">@item.Materia</td>
+                <td rowspan="@(scoreCount + 1)">@item.Materia <a asp-page="/Voti/Add" asp-route-id="@item.IdMateria"><i class="bi bi-plus-circle" title="Aggiungi voto"></i></a></td>
                 <td rowspan="@(scoreCount + 1)">@item.Media</td>
             </tr>
             @foreach (var score in @item.Scores)
             {
                 <tr>
                     <td>@score.Voto</td>
-                    <td>@score.DataInserimento.ToString("dd/MM/yyyy")</td>
+                    <td>
+                        @score.DataInserimento.ToString("dd/MM/yyyy") 
+                        <a asp-page="/Voti/Edit" asp-route-id="@score.Id"><i class="bi bi-pencil-square" title="Modifica voto"></i></a>
+                        <a href="#"><i class="bi bi-dash-circle text-danger" title="Cancella voto"></i></a>
+                    </td>
                 </tr>              
             }            
         }
         else
         {
+            var scoreItem = item.Scores.FirstOrDefault();
             <tr>
-                <td>@item.Materia</td>
-                <td>@item.Media</td>
-                <td>@item.Scores.First().Voto</td>
-                <td>@item.Scores.First().DataInserimento.ToString("dd/MM/yyyy")</td>
+                <td>
+                    @item.Materia 
+                    <a asp-page="/Voti/Add" asp-route-id="@item.IdMateria">
+                        <i class="bi bi-plus-circle" title="Aggiungi voto"></i>
+                    </a>
+                </td>
+                <td>@(item.Media?.ToString() ?? "-")</td>
+                <td>@(scoreItem?.Voto.ToString() ?? "-")</td>
+                <td>
+                    @(scoreItem?.DataInserimento.ToString("dd/MM/yyyy") ?? "-") 
+                    @if (scoreItem != null) {
+                        <a asp-page="/Voti/Edit" asp-route-id="@scoreItem.Id"><i class="bi bi-pencil-square" title="Modifica voto"></i></a>
+                        <a href="#"><i class="bi bi-dash-circle text-danger" title="Cancella voto"></i></a>
+                    }
+                </td>
             </tr>
         }
     }

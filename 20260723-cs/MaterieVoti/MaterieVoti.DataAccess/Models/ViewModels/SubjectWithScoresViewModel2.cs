@@ -2,9 +2,9 @@ namespace MaterieVoti.DataAccess.Models.ViewModels;
 
 public class SubjectWithScoresViewModel2
 {
-    public int IdMatera { get; set; }
+    public int IdMateria { get; set; }
     public string Materia { get; set; } = string.Empty;
-    public float Media
+    public float? Media
     {
         get
         {
@@ -14,7 +14,7 @@ public class SubjectWithScoresViewModel2
             }
             else
             {
-                return 0;
+                return null;
             }
         }
     }
