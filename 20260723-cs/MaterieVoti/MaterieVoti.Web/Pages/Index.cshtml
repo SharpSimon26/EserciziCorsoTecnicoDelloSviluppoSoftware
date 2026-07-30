@@ -4,7 +4,45 @@
     ViewData["Title"] = "Home page";
 }
 
+@*
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+*@
+
+<table class="table table-bordered">
+    <tr>
+        <th scope="col">Materia</th>
+        <th scope="col">Media</th>
+        <th scope="col">Voto</th>
+        <th scope="col">Data</th>
+    </tr>
+    @foreach (var item in @Model.Scores)
+    {
+        int scoreCount = item.Scores.Count();
+        if (scoreCount > 1)
+        {
+            <tr>
+                <td rowspan="@(scoreCount + 1)">@item.Materia</td>
+                <td rowspan="@(scoreCount + 1)">@item.Media</td>
+            </tr>
+            @foreach (var score in @item.Scores)
+            {
+                <tr>
+                    <td>@score.Voto</td>
+                    <td>@score.DataInserimento.ToString("dd/MM/yyyy")</td>
+                </tr>              
+            }            
+        }
+        else
+        {
+            <tr>
+                <td>@item.Materia</td>
+                <td>@item.Media</td>
+                <td>@item.Scores.First().Voto</td>
+                <td>@item.Scores.First().DataInserimento.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    }
+</table>

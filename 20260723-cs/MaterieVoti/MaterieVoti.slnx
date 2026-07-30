@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="MaterieVoti.Console/MaterieVoti.Console.csproj" />
   <Project Path="MaterieVoti.DataAccess/MaterieVoti.DataAccess.csproj" />
   <Project Path="MaterieVoti.Web/MaterieVoti.Web.csproj" />
 </Solution>

@@ -1,7 +1,7 @@
 ﻿namespace MaterieVoti.DataAccess.Models;
 
-public class Materia
+public class Subject
 {
     public int Id { get; init; }
-    public string NomeMateria { get; init; } = string.Empty;
+    public string Materia { get; init; } = string.Empty;
 }
