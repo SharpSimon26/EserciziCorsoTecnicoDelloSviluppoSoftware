@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="DatabasePrimoDb/DatabasePrimoDb.sqlproj" Id="7e816642-a70c-4592-bc23-4ff671a6bbf4">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="TreeConsole/TreeConsole.csproj" />
 </Solution>

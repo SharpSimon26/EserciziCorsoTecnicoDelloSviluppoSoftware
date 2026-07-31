@@ -1,4 +1,6 @@
-﻿using Spectre.Console;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Spectre.Console;
 using TreeConsole.Models;
 
 var a = new Nodo { Label = "A" };
@@ -42,4 +44,36 @@ void PopulateTree(IHasTreeNodes treeNode, Nodo nodo)
     }
 }
 
-ShowTree(a);
+List<Nodo> GetChildrenByNodo(Nodo nodo, IEnumerable<TreeFlatItem> items)
+{
+    return nodo.Children = items.Where(x => x.ParentId == nodo.Id)
+          .Select(x => x.ToNode())
+          .ToList();
+}
+
+void BuildTree(Nodo nodo, IEnumerable<TreeFlatItem> items)
+{
+    nodo.Children = GetChildrenByNodo(nodo, items);
+
+    foreach (var child in nodo.Children)
+    {
+        BuildTree(child, items);
+    }
+}
+
+var connString = "Server=(localdb)\\MSSQLLocalDB;Database=PrimoDb;Integrated Security=True";
+
+await using var conn = new SqlConnection(connString);
+await conn.OpenAsync();
+
+var sql = "select * from Albero";
+var data = await conn.QueryAsync<TreeFlatItem>(sql);
+var items = data.ToArray();
+
+var inizio = items.Single(x => x.ParentId == null).ToNode();
+
+BuildTree(inizio, items);
+
+ShowTree(inizio);
+
+Console.ReadLine();
