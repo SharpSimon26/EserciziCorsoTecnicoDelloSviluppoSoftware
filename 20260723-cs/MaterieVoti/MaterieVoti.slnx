@@ -1,5 +1,9 @@
 <Solution>
   <Project Path="MaterieVoti.Console/MaterieVoti.Console.csproj" />
   <Project Path="MaterieVoti.DataAccess/MaterieVoti.DataAccess.csproj" />
+  <Project Path="MaterieVoti.Db/DatabaseProjectMaterieVoti/DatabaseProjectMaterieVoti.sqlproj" Id="4bb2afaa-475f-4dd6-9f07-0d9a2d11d374">
+    <Build />
+    <Deploy />
+  </Project>
   <Project Path="MaterieVoti.Web/MaterieVoti.Web.csproj" />
 </Solution>
