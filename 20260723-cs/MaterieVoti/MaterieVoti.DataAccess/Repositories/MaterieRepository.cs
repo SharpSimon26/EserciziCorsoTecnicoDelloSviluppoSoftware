@@ -58,7 +58,7 @@ public class MaterieRepository : IMaterieRepository
             IdVoto = m.Id,
             Materia = materie.First(r => r.Id == m.MateriaId).Materia,
             Voto = m.Voto,
-            DataInserimento = DateOnly.FromDateTime(m.DataInserimento)
+            DataInserimento = m.DataInserimento
         })
         .OrderBy(m => m.Materia)
         .ThenBy(m => m.DataInserimento);
@@ -66,29 +66,47 @@ public class MaterieRepository : IMaterieRepository
         return materieConVoti;
     }
 
-    public async Task<IEnumerable<SubjectWithScoresViewModel2>> GetScores2()
-    {
-        var materie = await GetMaterie();
-        var voti = await GetVoti();
-        //var materieConAlmenoUnVoto = materie.Where(m => voti.Any(t => t.MateriaId == m.Id));
-
-        var materieConVoti = materie.Select(m => new SubjectWithScoresViewModel2
-        {
-            IdMateria = m.Id,
-            Materia = m.Materia,
-            Scores = voti.Where(s => s.MateriaId == m.Id)
-        });
-
-        return materieConVoti;
-    }
-
     public async Task<IEnumerable<SubjectWithScoresViewModel>> GetMaterieVoti()
     {
         var conn = await _connectionFactory.CreateConnection();
-        var sql = "select v.Id IdVoto, v.Voto, m.Materia, v.DataInserimento from Voti v INNER JOIN Materie m ON m.Id = v.MateriaId";
+        var sql = @"select m.Id IdMateria, v.Id IdVoto, v.Voto, m.Materia, v.DataInserimento 
+                    from Materie m LEFT JOIN Voti v ON m.Id = v.MateriaId 
+                    ORDER BY Materia ASC, DataInserimento DESC";
         var mats = await conn.QueryAsync<SubjectWithScoresViewModel>(sql);
 
         return mats;
+    }    
+
+    public async Task<IEnumerable<SubjectWithScoresViewModel2>> GetScores2()
+    {
+        //var materie = await GetMaterie();
+        //var voti = await GetVoti();
+        //var materieConAlmenoUnVoto = materie.Where(m => voti.Any(t => t.MateriaId == m.Id));
+        var materieVoti = await GetMaterieVoti();
+
+        /*
+        var tmp = materieVoti.GroupBy(x => x.Materia).Select(x => new SubjectWithScoresViewModel2
+        {
+        });
+        */
+
+        var materieConVoti = materieVoti
+            .DistinctBy(m => m.Materia)
+            .Select(m => new SubjectWithScoresViewModel2
+            {
+                IdMateria = m.IdMateria,
+                Materia = m.Materia,
+                Scores = materieVoti.Where(s => s.IdMateria == m.IdMateria && m.DataInserimento != null)
+                                    .Select(x => new Score { 
+                                        Id = x.IdVoto, 
+                                        MateriaId = x.IdMateria,
+                                        Voto = x.Voto.GetValueOrDefault(),
+                                        DataInserimento = x.DataInserimento.GetValueOrDefault()
+                                    })
+            } 
+        );
+
+        return materieConVoti;
     }
 
     public async Task<int> AddVoto(int materiaId, float voto, DateTime dataVoto)

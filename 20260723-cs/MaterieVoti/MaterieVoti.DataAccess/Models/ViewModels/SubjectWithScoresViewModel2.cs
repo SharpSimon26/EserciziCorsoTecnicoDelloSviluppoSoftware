@@ -10,7 +10,8 @@ public class SubjectWithScoresViewModel2
         {
             if (Scores.Any())
             {
-                return Scores.Sum(m => m.Voto) / Scores.Count();
+                // return Scores.Sum(m => m.Voto) / Scores.Count();
+                return Scores.Average(m => m.Voto);
             }
             else
             {
