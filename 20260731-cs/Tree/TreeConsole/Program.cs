@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using Spectre.Console;
+using TreeConsole.ExtensionMethods;
 using TreeConsole.Models;
 
 var a = new Nodo { Label = "A" };
@@ -69,6 +70,24 @@ await conn.OpenAsync();
 var sql = "select * from Albero";
 var data = await conn.QueryAsync<TreeFlatItem>(sql);
 var items = data.ToArray();
+
+//var dict = new Dictionary<int, List<Nodo>>();
+
+//foreach (var item in items)
+//{
+
+//}
+
+//foreach (var item in dict.Values)
+//{
+//    foreach (var ch in item)
+//    {
+//        if (dict.ContainsKey(ch.Id))
+//        {
+//            ch.Children = dict[ch.Id];
+//        }
+//    }
+//}
 
 var inizio = items.Single(x => x.ParentId == null).ToNode();
 
