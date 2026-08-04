@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (!Model.IsActive)
+{
+    <div class="text-center mb-4">
+        @if (!string.IsNullOrWhiteSpace(Model.WinnerName))
+        {
+            <h1 class="display-4">@Model.WinnerName vince</h1>
+        }
+        else
+        {
+            <h1 class="display-4">Parità</h1>
+        }
+        <p>La partita è finita</p>
+    </div>
+}
+
+<div class="container w-50">
+    <div class="row g-3 mb-3">
+        <div class="col-4 me-3 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="1" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[0].Status</a></div>
+        <div class="col-4 me-3 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="2" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[1].Status</a></div>
+        <div class="col-4 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="3" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[2].Status</a></div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-4 me-3 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="4" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[3].Status</a></div>
+        <div class="col-4 me-3 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="5" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[4].Status</a></div>
+        <div class="col-4 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="6" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[5].Status</a></div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-4 w-25 me-3 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="7" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[6].Status</a></div>
+        <div class="col-4 w-25 me-3 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="8" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[7].Status</a></div>
+        <div class="col-4 w-25 ratio ratio-1x1 border border-5 border-black bg-light"><a asp-page="Game" asp-route-id="9" class="d-flex justify-content-center align-items-center text-decoration-none link-dark fs-1">@Model.GameBoard[8].Status</a></div>
+    </div>
+</div>
