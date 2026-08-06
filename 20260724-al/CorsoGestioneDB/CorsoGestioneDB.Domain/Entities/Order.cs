@@ -8,5 +8,5 @@ public class Order
     public int PaymentMethodID { get; set; }
     public int SalesChannelID { get; set; }
     public int OrderStatusID { get; set; }
-    public DateOnly? DeliveryDate { get; set; }
+    public DateTime? DeliveryDate { get; set; }
 }
