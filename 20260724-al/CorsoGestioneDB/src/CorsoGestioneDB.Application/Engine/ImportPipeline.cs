@@ -26,43 +26,55 @@ public class ImportPipeline
 
     public async Task ExecuteAsync(ImportContext context)
     {
+        // 1. Normalize
         await _normalize.ExecuteAsync(context);
+
         if (context.IsRejected)
         {
             await _log.ExecuteAsync(context);
             return;
         }
 
+        // 2. Convert
         await _convert.ExecuteAsync(context);
+
         if (context.IsRejected)
         {
             await _log.ExecuteAsync(context);
             return;
         }
 
+        // 3. Duplicate
         await _duplicate.ExecuteAsync(context);
+
         if (context.IsRejected)
         {
             await _log.ExecuteAsync(context);
             return;
         }
 
+        // 4. Validate
         await _validate.ExecuteAsync(context);
+
         if (context.IsRejected)
         {
             await _log.ExecuteAsync(context);
             return;
         }
 
+        // 5. Reconstruct
         await _reconstruct.ExecuteAsync(context);
+        
         if (context.IsRejected)
         {
             await _log.ExecuteAsync(context);
             return;
         }
 
+        // 6. Import
         await _import.ExecuteAsync(context);
 
+        // 7. Log
         await _log.ExecuteAsync(context);
     }
 }
