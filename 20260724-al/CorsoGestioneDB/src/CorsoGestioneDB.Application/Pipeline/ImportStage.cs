@@ -9,7 +9,7 @@ public class ImportStage : StageBase
     {
     }
 
-    public override async Task ExecuteAsync(ImportContext context)
+    public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
         throw new NotImplementedException();
     }

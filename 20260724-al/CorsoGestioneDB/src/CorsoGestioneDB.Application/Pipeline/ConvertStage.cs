@@ -10,25 +10,28 @@ public class ConvertStage : StageBase
     {
     }
 
-    public override async Task ExecuteAsync(ImportContext context)
+    public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
-        ConvertOrder(context);
-        ConvertOrderLine(context);
-        ConvertCustomer(context);
-        ConvertProduct(context);
+        foreach (var context in contexts)
+        {
+            ConvertOrder(context);
+            ConvertOrderLine(context);
+            ConvertCustomer(context);
+            ConvertProduct(context);            
+        }
     }
 
     public static void ConvertOrder(ImportContext context)
     {
         // OrderID
-        context.Order.OrderID = context.RawOrder.OrderID;
+        context.Data.Order.OrderID = context.RawOrder.OrderID;
 
         // OrderDate
         var dtOrderDate = ConvertHelper.ToDateTime(context.RawOrder.OrderDate);
     
         if (dtOrderDate.Success)
         {
-            context.Order.OrderDate = dtOrderDate.Value;
+            context.Data.Order.OrderDate = dtOrderDate.Value;
         }
         else
         {
@@ -36,13 +39,13 @@ public class ConvertStage : StageBase
         }
         
         // PaymentMethod
-        context.Order.PaymentMethod = context.RawOrder.PaymentMethod;
+        context.Data.Order.PaymentMethod = context.RawOrder.PaymentMethod;
 
         // SalesChannel
-        context.Order.SalesChannel = context.RawOrder.SalesChannel;
+        context.Data.Order.SalesChannel = context.RawOrder.SalesChannel;
 
         // OrderStatus
-        context.Order.OrderStatus = context.RawOrder.OrderStatus;
+        context.Data.Order.OrderStatus = context.RawOrder.OrderStatus;
 
         // DeliveryDate -> potrebbe essere null
         if (!string.IsNullOrWhiteSpace(context.RawOrder.DeliveryDate))
@@ -51,7 +54,7 @@ public class ConvertStage : StageBase
 
             if (dtDeliveryDate.Success)
             {
-                context.Order.DeliveryDate = dtDeliveryDate.Value;
+                context.Data.Order.DeliveryDate = dtDeliveryDate.Value;
             }
             else
             {
@@ -67,7 +70,7 @@ public class ConvertStage : StageBase
 
         if (qty.Success)
         {
-            context.OrderLine.Quantity = qty.Value;
+            context.Data.OrderLine.Quantity = qty.Value;
         }
         else
         {
@@ -79,7 +82,7 @@ public class ConvertStage : StageBase
 
         if (unitPrice.Success)
         {
-            context.OrderLine.UnitPrice = unitPrice.Value;
+            context.Data.OrderLine.UnitPrice = unitPrice.Value;
         }
         else
         {
@@ -91,7 +94,7 @@ public class ConvertStage : StageBase
 
         if (discountPct.Success)
         {
-            context.OrderLine.DiscountPct = discountPct.Value;
+            context.Data.OrderLine.DiscountPct = discountPct.Value;
         }
         else
         {
@@ -103,7 +106,7 @@ public class ConvertStage : StageBase
 
         if (shippingCost.Success)
         {
-            context.OrderLine.ShippingCost = shippingCost.Value;
+            context.Data.OrderLine.ShippingCost = shippingCost.Value;
         }
         else
         {
@@ -115,7 +118,7 @@ public class ConvertStage : StageBase
 
         if (revenue.Success)
         {
-            context.OrderLine.Revenue = revenue.Value;
+            context.Data.OrderLine.Revenue = revenue.Value;
         }
         else
         {
@@ -130,7 +133,7 @@ public class ConvertStage : StageBase
 
         if (customerId.Success)
         {
-            context.Customer.CustomerID = customerId.Value;
+            context.Data.Customer.CustomerID = customerId.Value;
         }
         else
         {
@@ -138,29 +141,29 @@ public class ConvertStage : StageBase
         }
 
         // FirstName
-        context.Customer.FirstName = context.RawOrder.FirstName;
+        context.Data.Customer.FirstName = context.RawOrder.FirstName;
 
         // LastName
-        context.Customer.LastName = context.RawOrder.LastName;
+        context.Data.Customer.LastName = context.RawOrder.LastName;
 
         // Email
-        context.Customer.Email = context.RawOrder.Email;
+        context.Data.Customer.Email = context.RawOrder.Email;
 
         // City
-        context.Customer.City = context.RawOrder.City;
+        context.Data.Customer.City = context.RawOrder.City;
 
         // Province
-        context.Customer.Province = context.RawOrder.Province;
+        context.Data.Customer.Province = context.RawOrder.Province;
 
         // Region
-        context.Customer.Region = context.RawOrder.Region;
+        context.Data.Customer.Region = context.RawOrder.Region;
 
         // SignupDate
         var signupDate = ConvertHelper.ToDateTime(context.RawOrder.SignupDate);
 
         if (signupDate.Success)
         {
-            context.Customer.SignupDate = signupDate.Value;
+            context.Data.Customer.SignupDate = signupDate.Value;
         }
         else
         {
@@ -171,12 +174,12 @@ public class ConvertStage : StageBase
     public static void ConvertProduct(ImportContext context)
     {
         // ProductCode
-        context.Product.ProductCode = context.RawOrder.ProductCode;
+        context.Data.Product.ProductCode = context.RawOrder.ProductCode;
 
         // ProductName
-        context.Product.ProductName = context.RawOrder.ProductName;
+        context.Data.Product.ProductName = context.RawOrder.ProductName;
 
         // Category
-        context.Product.CategoryName = context.RawOrder.Category;
+        context.Data.Product.CategoryName = context.RawOrder.Category;
     }
 }

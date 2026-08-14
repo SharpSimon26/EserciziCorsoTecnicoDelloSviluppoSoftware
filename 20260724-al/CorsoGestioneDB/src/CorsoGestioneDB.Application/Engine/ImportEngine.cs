@@ -16,12 +16,10 @@ public class ImportEngine
     public async Task RunAsync()
     {
         var rows = await _stagingOrderRepository.GetAllAsync();
-
-        foreach (var row in rows)
+        var importContexts = rows.Select(m => new ImportContext(m));
+        if (importContexts.Any())
         {
-            var context = new ImportContext(row);
-
-            await _pipeline.ExecuteAsync(context);
+            await _pipeline.ExecuteAsync(importContexts);
         }
     }
 }

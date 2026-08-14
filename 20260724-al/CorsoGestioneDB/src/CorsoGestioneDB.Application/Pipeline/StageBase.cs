@@ -12,5 +12,5 @@ public abstract class StageBase : IStage
         this.logger = logger;
     }
 
-    public abstract Task ExecuteAsync(ImportContext context);
+    public abstract Task ExecuteAsync(IEnumerable<ImportContext> contexts);
 }

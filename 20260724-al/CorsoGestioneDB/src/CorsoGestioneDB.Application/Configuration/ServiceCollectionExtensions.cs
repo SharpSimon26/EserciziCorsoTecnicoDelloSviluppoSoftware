@@ -13,8 +13,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient<ImportPipeline>();
 
         services.AddTransient<NormalizeStage>();
-        services.AddTransient<ConvertStage>();
         services.AddTransient<DuplicateStage>();
+        services.AddTransient<ConvertStage>();
         services.AddTransient<ValidateStage>();
         services.AddTransient<ReconstructStage>();
         services.AddTransient<ImportStage>();

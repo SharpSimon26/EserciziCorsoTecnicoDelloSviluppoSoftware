@@ -12,12 +12,15 @@ public class NormalizeStage : StageBase
     {
     }
 
-    public override async Task ExecuteAsync(ImportContext context)
+    public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
-        NormalizeOrder(context);
-        // NormalizeOrderLine(context);
-        NormalizeCustomer(context);
-        NormalizeProduct(context);
+        foreach (var context in contexts)
+        {
+            NormalizeOrder(context);
+            // NormalizeOrderLine(context);
+            NormalizeCustomer(context);
+            NormalizeProduct(context);            
+        }
     }
 
     private void NormalizeOrder(ImportContext context)

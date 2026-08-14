@@ -4,5 +4,5 @@ namespace CorsoGestioneDB.Application.Pipeline;
 
 public interface IStage
 {
-    Task ExecuteAsync(ImportContext context);
+    Task ExecuteAsync(IEnumerable<ImportContext> contexts);
 }

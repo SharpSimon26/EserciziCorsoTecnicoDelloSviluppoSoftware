@@ -24,57 +24,27 @@ public class ImportPipeline
         _log = log;
     }
 
-    public async Task ExecuteAsync(ImportContext context)
+    public async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
         // 1. Normalize
-        await _normalize.ExecuteAsync(context);
+        await _normalize.ExecuteAsync(contexts);
 
-        if (context.IsRejected)
-        {
-            await _log.ExecuteAsync(context);
-            return;
-        }
+        // 2. Duplicate
+        await _duplicate.ExecuteAsync(contexts.Where(x => x.IsProcessable()));
 
-        // 2. Convert
-        await _convert.ExecuteAsync(context);
-
-        if (context.IsRejected)
-        {
-            await _log.ExecuteAsync(context);
-            return;
-        }
-
-        // 3. Duplicate
-        await _duplicate.ExecuteAsync(context);
-
-        if (context.IsRejected)
-        {
-            await _log.ExecuteAsync(context);
-            return;
-        }
+        // 3. Convert
+        await _convert.ExecuteAsync(contexts.Where(x => x.IsProcessable()));
 
         // 4. Validate
-        await _validate.ExecuteAsync(context);
-
-        if (context.IsRejected)
-        {
-            await _log.ExecuteAsync(context);
-            return;
-        }
+        await _validate.ExecuteAsync(contexts.Where(x => x.IsProcessable()));
 
         // 5. Reconstruct
-        await _reconstruct.ExecuteAsync(context);
-        
-        if (context.IsRejected)
-        {
-            await _log.ExecuteAsync(context);
-            return;
-        }
+        await _reconstruct.ExecuteAsync(contexts.Where(x => x.IsProcessable()));
 
         // 6. Import
-        await _import.ExecuteAsync(context);
+        await _import.ExecuteAsync(contexts.Where(x => x.IsProcessable()));
 
         // 7. Log
-        await _log.ExecuteAsync(context);
+        await _log.ExecuteAsync(contexts);
     }
 }
