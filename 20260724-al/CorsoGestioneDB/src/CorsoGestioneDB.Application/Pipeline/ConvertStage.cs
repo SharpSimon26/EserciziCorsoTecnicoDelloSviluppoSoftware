@@ -21,7 +21,7 @@ public class ConvertStage : StageBase
         }
     }
 
-    public static void ConvertOrder(ImportContext context)
+    public void ConvertOrder(ImportContext context)
     {
         // OrderID
         context.Data.Order.OrderID = context.RawOrder.OrderID;
@@ -36,6 +36,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(dtOrderDate.ErrorMessage);
+            logger.LogInformation(dtOrderDate.ErrorMessage);
         }
         
         // PaymentMethod
@@ -59,11 +60,12 @@ public class ConvertStage : StageBase
             else
             {
                 context.Messages.Add(dtDeliveryDate.ErrorMessage);
+                logger.LogInformation(dtDeliveryDate.ErrorMessage);
             }
         }
     }
 
-    public static void ConvertOrderLine(ImportContext context)
+    public void ConvertOrderLine(ImportContext context)
     {
         // Quantity
         var qty = ConvertHelper.ToInt(context.RawOrder.Quantity);
@@ -75,6 +77,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(qty.ErrorMessage);
+            logger.LogInformation(qty.ErrorMessage);
         }
 
         // UnitPrice
@@ -87,6 +90,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(unitPrice.ErrorMessage);
+            logger.LogInformation(unitPrice.ErrorMessage);
         }
 
         // DiscountPct
@@ -99,6 +103,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(discountPct.ErrorMessage);
+            logger.LogInformation(discountPct.ErrorMessage);
         }
 
         // ShippingCost
@@ -111,6 +116,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(shippingCost.ErrorMessage);
+            logger.LogInformation(shippingCost.ErrorMessage);
         }
 
         // Revenue
@@ -123,10 +129,11 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(revenue.ErrorMessage);
+            logger.LogInformation(revenue.ErrorMessage);
         }
     }
 
-    public static void ConvertCustomer(ImportContext context)
+    public void ConvertCustomer(ImportContext context)
     {
         // CustomerID
         var customerId = ConvertHelper.ToInt(context.RawOrder.CustomerID);
@@ -138,6 +145,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(customerId.ErrorMessage);
+            logger.LogInformation(customerId.ErrorMessage);
         }
 
         // FirstName
@@ -168,6 +176,7 @@ public class ConvertStage : StageBase
         else
         {
             context.Messages.Add(signupDate.ErrorMessage);
+            logger.LogInformation(signupDate.ErrorMessage);
         }
     }
 

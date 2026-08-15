@@ -26,15 +26,27 @@ public class ImportContext
 
     public bool IsRejected()
     {
-        return Status == ImportRecordStatus.Rejected || Status == ImportRecordStatus.Duplicate;
+        return Status == ImportRecordStatus.Rejected || Status == ImportRecordStatus.Duplicate || Status == ImportRecordStatus.Conflict;
     }
 
-    public void MarkAsDuplicate()
+    public bool IsReady()
+    {
+        return Status == ImportRecordStatus.Ready;
+    }  
+
+    public void MarkAsDuplicate(string? reason = null)
     {
         Status = ImportRecordStatus.Duplicate;
+        RejectReason = reason;
     }
 
-    public void Reject(string reason)
+    public void MarkAsConflict(string? reason = null)
+    {
+        Status = ImportRecordStatus.Conflict;
+        RejectReason = reason;
+    }    
+
+    public void MarkAsRejected(string? reason = null)
     {
         Status = ImportRecordStatus.Rejected;
         RejectReason = reason;

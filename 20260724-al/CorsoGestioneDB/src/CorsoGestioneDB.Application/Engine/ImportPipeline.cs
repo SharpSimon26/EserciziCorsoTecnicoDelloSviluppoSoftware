@@ -42,9 +42,9 @@ public class ImportPipeline
         await _reconstruct.ExecuteAsync(contexts.Where(x => x.IsProcessable()).ToList());
 
         // 6. Import
-        await _import.ExecuteAsync(contexts.Where(x => x.IsProcessable()).ToList());
+        await _import.ExecuteAsync(contexts.Where(x => x.IsReady()).ToList());
 
         // 7. Log
-        await _log.ExecuteAsync(contexts);
+        await _log.ExecuteAsync(contexts.ToList());
     }
 }

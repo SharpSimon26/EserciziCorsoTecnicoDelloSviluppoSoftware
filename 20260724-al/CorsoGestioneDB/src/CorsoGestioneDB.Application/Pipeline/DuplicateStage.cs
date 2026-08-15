@@ -21,14 +21,21 @@ public class DuplicateStage : StageBase
         {
             // Prende il primo elemento del gruppo e lo confronta con gli altri
             var firstItem = group.First();
-            var duplicates = group.Skip(1)
-                                  .Where(x => IsDuplicate(x, firstItem))
-                                  .ToList();
+            var duplicates = group.Skip(1).ToList();
 
             // Se sono identici segna gli altri come duplicati
             foreach (var item in duplicates)
             {
-                item.MarkAsDuplicate();
+                if (IsDuplicate(item, firstItem))
+                {
+                    item.MarkAsDuplicate();
+                    logger.LogInformation("Rilevato Ordine {0} duplicato", item.RawOrder.OrderID);
+                }
+                else
+                {
+                    item.MarkAsConflict();
+                    logger.LogInformation("Rilevato Ordine {0} in conflitto", item.RawOrder.OrderID);
+                }
             }
         }
     }
