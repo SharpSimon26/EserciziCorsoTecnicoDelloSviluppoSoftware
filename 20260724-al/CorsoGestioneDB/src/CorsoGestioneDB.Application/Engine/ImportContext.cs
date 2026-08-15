@@ -29,6 +29,11 @@ public class ImportContext
         return Status == ImportRecordStatus.Rejected || Status == ImportRecordStatus.Duplicate;
     }
 
+    public void MarkAsDuplicate()
+    {
+        Status = ImportRecordStatus.Duplicate;
+    }
+
     public void Reject(string reason)
     {
         Status = ImportRecordStatus.Rejected;

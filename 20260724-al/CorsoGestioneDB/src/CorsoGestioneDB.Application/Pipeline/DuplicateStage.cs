@@ -11,6 +11,42 @@ public class DuplicateStage : StageBase
 
     public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
-        throw new NotImplementedException();
+        // Estrae gli OrderID duplicati da RawOrders
+        var groups = contexts.GroupBy(x => x.RawOrder.OrderID)
+                             .Where(y => y.Count() > 1)
+                             .ToList();
+
+        // Ciclo per i gruppi con OrderID duplicato
+        foreach (var group in groups)
+        {
+            // Prende il primo elemento del gruppo e lo confronta con gli altri
+            var firstItem = group.First();
+            var duplicates = group.Skip(1)
+                                  .Where(x => IsDuplicate(x, firstItem))
+                                  .ToList();
+
+            // Se sono identici segna gli altri come duplicati
+            foreach (var item in duplicates)
+            {
+                item.MarkAsDuplicate();
+            }
+        }
+    }
+
+    private static bool IsDuplicate(ImportContext item, ImportContext firstItem)
+    {
+        return item.RawOrder.OrderID     == firstItem.RawOrder.OrderID     &&
+               item.RawOrder.OrderDate   == firstItem.RawOrder.OrderDate   &&
+               item.RawOrder.CustomerID  == firstItem.RawOrder.CustomerID  &&
+               item.RawOrder.FirstName   == firstItem.RawOrder.FirstName   &&
+               item.RawOrder.LastName    == firstItem.RawOrder.LastName    &&
+               item.RawOrder.City        == firstItem.RawOrder.City        &&
+               item.RawOrder.ProductCode == firstItem.RawOrder.ProductCode &&
+               item.RawOrder.ProductName == firstItem.RawOrder.ProductName &&
+               item.RawOrder.Quantity    == firstItem.RawOrder.Quantity    &&
+               item.RawOrder.UnitPrice   == firstItem.RawOrder.UnitPrice   &&
+               item.RawOrder.DiscountPct == firstItem.RawOrder.DiscountPct &&
+               item.RawOrder.OrderStatus == firstItem.RawOrder.OrderStatus &&
+               item.RawOrder.Revenue     == firstItem.RawOrder.Revenue;
     }
 }
