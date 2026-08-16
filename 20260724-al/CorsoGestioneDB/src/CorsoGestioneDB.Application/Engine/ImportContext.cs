@@ -32,7 +32,7 @@ public class ImportContext
     public bool IsReady()
     {
         return Status == ImportRecordStatus.Ready;
-    }  
+    }
 
     public void MarkAsDuplicate(string? reason = null)
     {
@@ -44,7 +44,7 @@ public class ImportContext
     {
         Status = ImportRecordStatus.Conflict;
         RejectReason = reason;
-    }    
+    }
 
     public void MarkAsRejected(string? reason = null)
     {

@@ -4,5 +4,5 @@ namespace CorsoGestioneDB.Abstractions.Interfaces;
 
 public interface IOrderRepository
 {
-    Task<Order?> GetOrderById(string orderId);
+    Task<Order?> GetOrderByOrderIdAsync(string orderId);
 }

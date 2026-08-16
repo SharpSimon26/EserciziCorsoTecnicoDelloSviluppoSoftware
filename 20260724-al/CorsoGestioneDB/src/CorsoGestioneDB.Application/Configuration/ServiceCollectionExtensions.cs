@@ -15,8 +15,8 @@ public static class ServiceCollectionExtensions
         services.AddTransient<NormalizeStage>();
         services.AddTransient<DuplicateStage>();
         services.AddTransient<ConvertStage>();
+        services.AddTransient<ReconstructStage>();        
         services.AddTransient<ValidateStage>();
-        services.AddTransient<ReconstructStage>();
         services.AddTransient<ImportStage>();
         services.AddTransient<LogStage>();
 

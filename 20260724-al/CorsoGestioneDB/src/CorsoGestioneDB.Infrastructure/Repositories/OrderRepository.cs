@@ -12,7 +12,7 @@ public class OrderRepository : AbstractRepository, IOrderRepository
     {
     }
 
-    public async Task<Order?> GetOrderById(string orderId)
+    public async Task<Order?> GetOrderByOrderIdAsync(string orderId)
     {
         using IDbConnection db = connectionFactory.CreateConnection();
         var sql = "select * from Orders where OrderID = @orderId";
