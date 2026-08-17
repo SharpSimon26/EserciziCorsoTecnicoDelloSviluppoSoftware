@@ -12,12 +12,12 @@ public class ConvertStage : StageBase
 
     public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
-        foreach (var context in contexts)
+        foreach (var context in contexts.Where(x => x.IsProcessable()))
         {
+            ConvertProduct(context);
+            ConvertCustomer(context);
             ConvertOrder(context);
             ConvertOrderLine(context);
-            ConvertCustomer(context);
-            ConvertProduct(context);            
         }
     }
 

@@ -16,7 +16,7 @@ public class ImportEngine
     public async Task RunAsync()
     {
         var rows = await _stagingOrderRepository.GetAllAsync();
-        var importContexts = rows.Select(m => new ImportContext(m));
+        var importContexts = rows.Select(m => new ImportContext(m)).ToList();
         if (importContexts.Any())
         {
             await _pipeline.ExecuteAsync(importContexts);

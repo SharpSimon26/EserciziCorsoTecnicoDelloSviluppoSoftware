@@ -1,5 +1,6 @@
 ﻿using CorsoGestioneDB.Application.Engine;
 using CorsoGestioneDB.Application.Pipeline;
+using CorsoGestioneDB.Application.Pipeline.Rules;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CorsoGestioneDB.Application.Configuration;
@@ -9,16 +10,21 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         // Registrazione dei repository dell'applicazione
-        services.AddTransient<ImportEngine>();
-        services.AddTransient<ImportPipeline>();
+        services.AddScoped<ImportEngine>();
+        services.AddScoped<ImportPipeline>();
 
-        services.AddTransient<NormalizeStage>();
-        services.AddTransient<DuplicateStage>();
-        services.AddTransient<ConvertStage>();
-        services.AddTransient<ReconstructStage>();        
-        services.AddTransient<ValidateStage>();
-        services.AddTransient<ImportStage>();
-        services.AddTransient<LogStage>();
+        // Regole di ricostruzione dei dati
+        services.AddScoped<IReconstructionRule, ReconstructUnitPriceRule>();
+        services.AddScoped<IReconstructionRule, ReconstructQuantityRule>();
+
+        // Stadi della pipeline
+        services.AddScoped<NormalizeStage>();
+        services.AddScoped<DuplicateStage>();
+        services.AddScoped<ConvertStage>();
+        services.AddScoped<ReconstructStage>();        
+        services.AddScoped<ValidateStage>();
+        services.AddScoped<ImportStage>();
+        services.AddScoped<LogStage>();
 
         return services;
     }

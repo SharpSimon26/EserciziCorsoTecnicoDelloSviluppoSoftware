@@ -11,6 +11,11 @@ public class ValidateStage : StageBase
 
     public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
+        foreach (var context in contexts.Where(x => x.IsProcessable()))
+        {
+            // TODO ...
+        }
+
         throw new NotImplementedException();
     }
 }

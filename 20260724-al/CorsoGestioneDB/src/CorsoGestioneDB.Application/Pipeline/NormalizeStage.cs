@@ -32,7 +32,7 @@ public class NormalizeStage : StageBase
         {
             context.RawOrder.OrderID = orderId.Value;
             var msg = string.Format(NORM_LOG_MESSAGE, orderId.Value, "OrderID", orderId.OriginalValue, orderId.Value);
-            
+            context.Messages.Add(msg);
             logger.LogInformation(msg);
         }
 
@@ -44,7 +44,9 @@ public class NormalizeStage : StageBase
         if (paymentMethod.Changed)
         {
             context.RawOrder.PaymentMethod = paymentMethod.Value;
-            logger.LogInformation(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "PaymentMethod", paymentMethod.OriginalValue, paymentMethod.Value);
+            var msg = string.Format(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "PaymentMethod", paymentMethod.OriginalValue, paymentMethod.Value);
+            context.Messages.Add(msg);
+            logger.LogInformation(msg);
         }
 
         // SalesChannel
@@ -53,8 +55,9 @@ public class NormalizeStage : StageBase
         if (salesChannel.Changed)
         {
             context.RawOrder.SalesChannel = salesChannel.Value;
-
-            logger.LogInformation(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "SalesChannel", salesChannel.OriginalValue, salesChannel.Value);
+            var msg = string.Format(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "SalesChannel", salesChannel.OriginalValue, salesChannel.Value);
+            context.Messages.Add(msg);
+            logger.LogInformation(msg);
         }
 
         // OrderStatus
@@ -63,7 +66,9 @@ public class NormalizeStage : StageBase
         if (orderStatus.Changed)
         {
             context.RawOrder.OrderStatus = orderStatus.Value;
-            logger.LogInformation(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "OrderStatus", orderStatus.OriginalValue, orderStatus.Value);
+            var msg = string.Format(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "OrderStatus", orderStatus.OriginalValue, orderStatus.Value);
+            context.Messages.Add(msg);
+            logger.LogInformation(msg);
         }
 
         // DeliveryDate
@@ -88,7 +93,9 @@ public class NormalizeStage : StageBase
         if (firstName.Changed)
         {
             context.RawOrder.FirstName = firstName.Value;
-            logger.LogInformation(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "FirstName", firstName.OriginalValue, firstName.Value);
+            var msg = string.Format(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "FirstName", firstName.OriginalValue, firstName.Value);
+            context.Messages.Add(msg);
+            logger.LogInformation(msg);
         }
 
         // LastName
@@ -97,7 +104,9 @@ public class NormalizeStage : StageBase
         if (lastName.Changed)
         {
             context.RawOrder.LastName = lastName.Value;
-            logger.LogInformation(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "LastName", lastName.OriginalValue, lastName.Value);
+            var msg = string.Format(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "LastName", lastName.OriginalValue, lastName.Value);
+            context.Messages.Add(msg);
+            logger.LogInformation(msg);
         }
 
         // Email
@@ -106,7 +115,9 @@ public class NormalizeStage : StageBase
         if (email.Changed)
         {
             context.RawOrder.Email = email.Value;
-            logger.LogInformation(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "Email", email.OriginalValue, email.Value);
+            var msg = string.Format(NORM_LOG_MESSAGE, context.RawOrder.OrderID, "Email", email.OriginalValue, email.Value);
+            context.Messages.Add(msg);
+            logger.LogInformation(msg);
         }
 
         // Phone

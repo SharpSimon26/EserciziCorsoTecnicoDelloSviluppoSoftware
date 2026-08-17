@@ -1,8 +1,10 @@
-﻿using CorsoGestioneDB.Application.Models;
+﻿using System.Diagnostics;
+using CorsoGestioneDB.Application.Models;
 using CorsoGestioneDB.Domain.Entities;
 
 namespace CorsoGestioneDB.Application.Engine;
 
+[DebuggerDisplay("OrderID: {RawOrder.OrderID}, Status: {Status}, Messages: {Messages.Count}")]
 public class ImportContext
 {
     public StagingOrder RawOrder { get; private set; }

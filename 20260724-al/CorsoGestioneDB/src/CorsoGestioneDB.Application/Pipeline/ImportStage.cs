@@ -11,6 +11,11 @@ public class ImportStage : StageBase
 
     public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
+        foreach (var context in contexts.Where(x => x.IsReady()))
+        {
+            // TODO ...
+        }
+
         throw new NotImplementedException();
     }
 }

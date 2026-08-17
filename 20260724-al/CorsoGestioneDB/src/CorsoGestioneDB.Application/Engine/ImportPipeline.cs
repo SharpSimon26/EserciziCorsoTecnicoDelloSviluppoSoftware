@@ -30,21 +30,21 @@ public class ImportPipeline
         await _normalize.ExecuteAsync(contexts);
 
         // 2. Duplicate
-        await _duplicate.ExecuteAsync(contexts.Where(x => x.IsProcessable()).ToList());
+        await _duplicate.ExecuteAsync(contexts);
 
         // 3. Convert
-        await _convert.ExecuteAsync(contexts.Where(x => x.IsProcessable()).ToList());
+        await _convert.ExecuteAsync(contexts);
 
         // 4. Reconstruct
-        await _reconstruct.ExecuteAsync(contexts.Where(x => x.IsProcessable()).ToList());
+        await _reconstruct.ExecuteAsync(contexts);
 
         // 5. Validate
-        await _validate.ExecuteAsync(contexts.Where(x => x.IsProcessable()).ToList());
+        await _validate.ExecuteAsync(contexts);
 
         // 6. Import
-        await _import.ExecuteAsync(contexts.Where(x => x.IsReady()).ToList());
+        await _import.ExecuteAsync(contexts);
 
         // 7. Log
-        await _log.ExecuteAsync(contexts.ToList());
+        await _log.ExecuteAsync(contexts);
     }
 }

@@ -12,9 +12,9 @@ public class DuplicateStage : StageBase
     public override async Task ExecuteAsync(IEnumerable<ImportContext> contexts)
     {
         // Estrae gli OrderID duplicati da RawOrders
-        var groups = contexts.GroupBy(x => x.RawOrder.OrderID)
-                             .Where(y => y.Count() > 1)
-                             .ToList();
+        var groups = contexts.Where(x => x.IsProcessable())
+                             .GroupBy(x => x.RawOrder.OrderID)
+                             .Where(y => y.Count() > 1);
 
         // Ciclo per i gruppi con OrderID duplicato
         foreach (var group in groups)
@@ -47,6 +47,7 @@ public class DuplicateStage : StageBase
                item.RawOrder.CustomerID  == firstItem.RawOrder.CustomerID  &&
                item.RawOrder.FirstName   == firstItem.RawOrder.FirstName   &&
                item.RawOrder.LastName    == firstItem.RawOrder.LastName    &&
+               item.RawOrder.Email       == firstItem.RawOrder.Email       &&
                item.RawOrder.City        == firstItem.RawOrder.City        &&
                item.RawOrder.ProductCode == firstItem.RawOrder.ProductCode &&
                item.RawOrder.ProductName == firstItem.RawOrder.ProductName &&
