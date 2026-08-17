@@ -1,6 +1,6 @@
 ﻿using CorsoGestioneDB.Application.Helpers;
 
-namespace CorsoGestioneDB.Application.Tests;
+namespace CorsoGestioneDB.Application.Tests.Helpers;
 
 public class ConverHelperTests
 {
@@ -18,24 +18,21 @@ public class ConverHelperTests
         Assert.Equal(atteso, risultato.Value);
     }
 
-    public static TheoryData<string?, double?, bool> ConvertToDecimalData = new()
+    public static TheoryData<string?, decimal?, bool> ConvertToDecimalData = new()
     {
-        { "10.3", 10.3, true },
-        { " 113.71 ", 113.71, true },
-        { "1.234,50", 1234.50, true },
-        { "13,71", 13.71, true },
+        { "10.3", 10.3m, true },
+        { " 113.71 ", 113.71m, true },
+        { "1.234,50", 1234.50m, true },
+        { "13,71", 13.71m, true },
         { null, null, false },
         { "dieci", null, false }
     };
 
     [Theory]
     [MemberData(nameof(ConvertToDecimalData))]   
-    public void Convert_String_Returns_Decimal(string? value, double? attesoDouble, bool success)
+    public void Convert_String_Returns_Decimal(string? value, decimal? atteso, bool success)
     {
         var risultato = ConvertHelper.ToDecimal(value);
-
-        // Workaround conversione da double a decimal per problema del test runner di VS
-        decimal? atteso = (decimal?)attesoDouble;
 
         Assert.Equal(success, risultato.Success);
         Assert.Equal(atteso, risultato.Value);
