@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="JsonPlaceholder.Api/JsonPlaceholder.Api.csproj" Id="19508f16-31a1-4081-8a79-4d8892527bf0" />
+  <Project Path="JsonPlaceholder.ApiClient/JsonPlaceholder.ApiClient.csproj" />
+  <Project Path="JsonPlaceholder.Console/JsonPlaceholder.Console.csproj" />
+  <Project Path="JsonPlaceholder.DataAccess/JsonPlaceholder.DataAccess.csproj" />
+  <Project Path="JsonPlaceholder.Web/JsonPlaceholder.Web.csproj" />
+</Solution>
