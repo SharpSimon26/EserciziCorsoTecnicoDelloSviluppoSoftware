@@ -6,7 +6,7 @@ namespace JsonPlaceholder.DataAccess.Repositories;
 
 public class LikeRepository : AbstractRepository, ILikeRepository
 {
-    public LikeRepository(DbConnectionFactory connectionFactory) : base(connectionFactory)
+    public LikeRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
     {
     }
 

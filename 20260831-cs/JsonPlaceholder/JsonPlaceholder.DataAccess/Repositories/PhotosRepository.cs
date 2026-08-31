@@ -7,7 +7,7 @@ namespace JsonPlaceholder.DataAccess.Repositories;
 
 public class PhotosRepository : AbstractRepository, IPhotosRepository
 {
-    public PhotosRepository(DbConnectionFactory connectionFactory) : base(connectionFactory)
+    public PhotosRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
     {
     }
 

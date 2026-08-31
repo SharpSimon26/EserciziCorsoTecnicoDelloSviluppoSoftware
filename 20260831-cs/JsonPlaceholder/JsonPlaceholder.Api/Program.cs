@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<DbConnectionFactory>();
+builder.Services.AddScoped<IDbConnectionFactory, DbConnectionFactory>();
 builder.Services.AddScoped<IPhotosRepository, PhotosRepository>();
 builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 

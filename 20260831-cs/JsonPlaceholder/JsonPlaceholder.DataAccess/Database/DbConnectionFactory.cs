@@ -4,7 +4,7 @@ using System.Data;
 
 namespace JsonPlaceholder.DataAccess.Database;
 
-public class DbConnectionFactory : IAsyncDisposable
+public class DbConnectionFactory : IDbConnectionFactory, IAsyncDisposable
 {
     private readonly string _connectionString;
     private SqlConnection? _connection;
