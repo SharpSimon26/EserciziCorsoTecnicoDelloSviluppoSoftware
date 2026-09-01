@@ -70,7 +70,7 @@ app.MapPost("/calcolatrice", ([FromBody] Addendi addendi, [FromQuery] string ope
             break;
 
         default:
-            return Results.BadRequest("Operazione sconosciuta");
+            return Results.BadRequest(new { message = "Operazione sconosciuta" });
     }
 
     return Results.Ok(risultato);
@@ -87,7 +87,7 @@ app.MapPost("/calcolatrice2", ([FromBody] Operazione operazione) =>
     }
     catch (Exception)
     {
-        return Results.BadRequest("Operazione sconosciuta");
+        return Results.BadRequest(new { message = "Operazione sconosciuta" });
     }
 });
 
@@ -116,8 +116,29 @@ app.MapGet("/todos/{id}", ([FromRoute] int id) =>
     }
     else
     {
-        return Results.NotFound("Todo non trovato");
+        return Results.NotFound(new { message = "Todo non trovato" });
     }
+});
+
+app.MapPost("/todos", async ([FromBody] Todo newTodo) =>
+{
+    todos.Add(new Todo { Title = newTodo.Title, Done = false });
+
+    // INSERT INTO todos (label, done) VALUES ('Prova', false);
+    // @@IDENTITY dentro una select restituisce l'ultimo id inserito
+    /*
+    var sql = @"
+        INSERT INTO todos (label, done) VALUES (@title, false);
+        SELECT id, label as title, done, FROM todos WHERE id = @@IDENTITY;
+    ";
+    var res = await connr.QuerySingleAsync<Todo>(sql, newTodo);
+    */
+    // SELECT id, label as title, done from todos where id = @@IDENTITY
+    // return res != null
+    //    ? Results.Created($"https://localhost:7022/todos/{res.Id}", res)
+    //    : Results.BadRequest();
+
+    return Results.Created();
 });
 
 // ----------------------------------------------
@@ -132,7 +153,7 @@ app.MapGet("/photos", async ([FromServices] IPhotosRepository photosRepository) 
     }
     else
     {
-        return Results.NotFound("Nessuna foto trovata");
+        return Results.NotFound(new { message = "Nessuna foto trovata" });
     }
 });
 
@@ -146,7 +167,7 @@ app.MapGet("/photos/{id}", async ([FromServices] IPhotosRepository photosReposit
     }
     else
     {
-        return Results.NotFound("Foto non trovata");
+        return Results.NotFound(new { message = "Foto non trovata" });
     }
 });
 
