@@ -50,10 +50,15 @@ app.MapPost("/todos", async ([FromServices] ITodoRepository todoRepository, [Fro
 app.MapPut("/todos/{id}", async ([FromServices] ITodoRepository todoRepository, [FromBody] TodoUpdateDTO dto, [FromRoute] int id ) =>
 {
     // Le specifiche di PUT richiedono l'id da modificare nella Url
+    if (await todoRepository.GetTodoByIdAsync(id) == null)
+    {
+        return Results.NotFound(new { message = "Todo non trovato" });
+    }
+
     dto.Id = id;
     var todo = await todoRepository.UpdateTodoAsync(dto);
 
-    return todo == null ? Results.NotFound(new { message = "Todo non trovato" }) : Results.Ok(todo);
+    return Results.Ok(todo);
 });
 
 // UPDATE (done)
