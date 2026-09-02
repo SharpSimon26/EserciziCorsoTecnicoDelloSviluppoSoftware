@@ -8,10 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.17.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Todo.DataAccess\Todo.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Endpoints\v2\" />
   </ItemGroup>
 
 </Project>
