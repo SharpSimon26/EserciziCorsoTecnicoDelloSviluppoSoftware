@@ -1,0 +1,23 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>@count</h1>
+
+<button @onclick="decrementa" class="btn btn-success">-</button>
+<button @onclick="incrementa"  class="btn btn-success">+</button>
+
+@code {
+    int count = 0;
+
+    public void incrementa()
+    {
+        count++;
+    }
+
+    public void decrementa()
+    {
+        count--;
+    }
+}

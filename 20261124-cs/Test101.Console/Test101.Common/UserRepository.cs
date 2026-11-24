@@ -26,11 +26,22 @@ public class UserRepository
 
     public void DeleteUserById(int id)
     {
+        var index = _userList.FindIndex(u => u.Id == id);
+
+        if (index < 0)
+        {
+            throw new ArgumentException("Utente non trovato");
+        }
+
+        _userList.RemoveAt(index);
+
+        /*
         var u = GetUserById(id);
 
         if (u != null)
         {
             _userList.Remove(u);
         }
+        */
     }
 }

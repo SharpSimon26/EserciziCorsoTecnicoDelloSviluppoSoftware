@@ -3,7 +3,7 @@
 public class UserRepositoryTests
 {
     [Fact]
-    public void AddUser_ShouldAdd_NewUser()
+    public void AddUser_ShouldAdd_User()
     {
         // 1 Arrange
         var userRepository = new UserRepository();
@@ -89,7 +89,7 @@ public class UserRepositoryTests
     }
 
     [Fact]
-    public void DeleteUserById_ShouldNotDelete_User_IfNotExists()
+    public void DeleteUserById_Throws_IfUser_DoesNotExist()
     {
         // 1 Arrange
         var userRepository = new UserRepository();
@@ -98,11 +98,7 @@ public class UserRepositoryTests
         userRepository.AddUser(new User { Id = 3, FirstName = "Paolo", LastName = "Verdi" });
 
         // 2 Act
-        userRepository.DeleteUserById(30);
-        var user = userRepository.GetUserById(30);
-
         // 3 Assert
-        Assert.Null(user);
-        Assert.Equal(3, userRepository.Count());
+        Assert.Throws<ArgumentException>(() => userRepository.DeleteUserById(30));
     }
 }
