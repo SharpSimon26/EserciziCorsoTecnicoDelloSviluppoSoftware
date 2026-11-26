@@ -14,10 +14,10 @@ USE SolarOpsDB;
 GO
 
 -- a
-ALTER TABLE ricambi ADD CONSTRAINT uq_codice UNIQUE (codice);
+ALTER TABLE ricambi ADD CONSTRAINT uq_ricambi_codice UNIQUE (codice);
 
 -- b
-ALTER TABLE consumi_ricambi ADD CONSTRAINT ck_quantita CHECK (quantita > 0);
+ALTER TABLE consumi_ricambi ADD CONSTRAINT ck_consumo_quantita CHECK (quantita > 0);
 
 -- c
 ALTER TABLE dbo.ticket ADD CONSTRAINT ck_ticket_stato CHECK 
