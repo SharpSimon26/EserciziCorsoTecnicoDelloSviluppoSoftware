@@ -1,0 +1,16 @@
+﻿@using Todo.DataAccess.Models.Entities
+@using Todo.DataAccess.Repositories
+@inject ITodoRepository todoRepository
+
+<h3>TodoList</h3>
+
+
+
+@code {
+    public async Task<IEnumerable<TodoItem>> GetTodos()
+    {
+        var todos = await todoRepository.GetAllAsync();
+
+        return todos;
+    }
+}

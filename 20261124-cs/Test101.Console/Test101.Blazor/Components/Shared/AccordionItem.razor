@@ -1,0 +1,47 @@
+﻿<div class="accordion-item">
+    <h2 class="accordion-header">
+        <button class="@ButtonClass"
+                type="button"
+                @onclick="OnButtonClick"
+                aria-expanded="@IsOpen.ToString().ToLower()"
+                aria-controls="@CollapsibleId">
+            @Title
+        </button>
+    </h2>
+    <div id="@CollapsibleId" class="@BodyClass">
+        <div class="accordion-body">
+            @ChildContent
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public required string Title { get; set; }
+
+    [Parameter]
+    public required RenderFragment ChildContent { get; set; }
+
+    [CascadingParameter(Name = "Selected")]
+    public AccordionItem? Selected { get; set; }
+
+    [CascadingParameter(Name = "SelectHandler")]
+    public EventCallback<AccordionItem> SelectHandler { get; set; }
+
+    public string CollapsibleId { get; } = $"collapse-{Guid.NewGuid()}";
+
+    // Lo stato aperto dipende direttamente dal confronto con Selected
+    private bool IsOpen => Selected == this;
+
+    public string ButtonClass => IsOpen ? "accordion-button" : "accordion-button collapsed";
+
+    public string BodyClass => IsOpen ? "accordion-collapse collapse show" : "accordion-collapse collapse";
+
+    private async Task OnButtonClick()
+    {
+        if (SelectHandler.HasDelegate)
+        {
+            await SelectHandler.InvokeAsync(this);
+        }
+    }
+}

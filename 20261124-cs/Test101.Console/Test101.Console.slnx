@@ -3,4 +3,5 @@
   <Project Path="Test101.Common.Tests/Test101.Common.Tests.csproj" />
   <Project Path="Test101.Common/Test101.Common.csproj" />
   <Project Path="Test101.Console/Test101.Console.csproj" />
+  <Project Path="Todo.DataAccess/Todo.DataAccess.csproj" />
 </Solution>

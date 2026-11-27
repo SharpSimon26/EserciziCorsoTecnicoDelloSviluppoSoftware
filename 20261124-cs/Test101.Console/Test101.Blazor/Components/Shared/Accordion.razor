@@ -1,0 +1,23 @@
+﻿<div class="accordion" id="@AccordionId">
+    <CascadingValue Name="Selected" Value="Selected">
+        <CascadingValue Name="SelectHandler" Value="@SelectHandler">
+            @ChildContent
+        </CascadingValue>
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter]
+    public required RenderFragment ChildContent { get; set; }
+
+    public string AccordionId { get; } = $"accordion-{Guid.NewGuid()}";
+
+    public AccordionItem? Selected { get; set; }
+
+    public EventCallback<AccordionItem> SelectHandler =>
+        EventCallback.Factory.Create<AccordionItem>(this, item =>
+        {
+            // Se clicco sull'elemento già aperto, lo chiudo (null)
+            Selected = (Selected == item) ? null : item;
+        });
+}
